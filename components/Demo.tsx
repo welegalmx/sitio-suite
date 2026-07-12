@@ -23,8 +23,8 @@ function CalendlyEmbed() {
 
   if (showFallback) {
     return (
-      <div className="flex h-[560px] flex-col items-center justify-center gap-4 rounded-xl border border-white/10 bg-white/[0.02] px-8 text-center">
-        <p className="text-sm text-white/60">
+      <div className="flex h-[560px] flex-col items-center justify-center gap-4 rounded-xl border border-foreground/20 bg-foreground/[0.05] px-8 text-center">
+        <p className="text-sm text-foreground/60">
           No pudimos cargar el calendario. Escríbenos y agendamos tu demo por correo.
         </p>
         <a
@@ -52,7 +52,7 @@ function CalendlyEmbed() {
 
 export default function Demo() {
   return (
-    <section id="demo" className="bg-[#060C1C] py-24">
+    <section id="demo" className="bg-[#F0F7FF] py-24">
       <div className="mx-auto grid max-w-6xl gap-16 px-6 md:grid-cols-2 md:items-start">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -63,25 +63,25 @@ export default function Demo() {
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-mint">
             {demo.eyebrow}
           </p>
-          <h2 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight text-white md:text-4xl">
+          <h2 className="font-display mt-4 text-3xl font-extrabold leading-tight tracking-tight text-foreground md:text-4xl">
             {renderHighlighted(demo.headline, demo.headlineHighlight)}
           </h2>
-          <p className="mt-4 text-base text-white/45">{demo.subtitle}</p>
+          <p className="mt-4 text-base text-foreground/50">{demo.subtitle}</p>
 
           <div className="mt-10 space-y-5">
             {demo.highlights.map((item) => (
               <div key={item.text} className="flex items-start gap-4">
                 <span className="text-2xl leading-none">{item.emoji}</span>
-                <p className="text-sm leading-relaxed text-white/70">{item.text}</p>
+                <p className="text-sm leading-relaxed text-foreground/70">{item.text}</p>
               </div>
             ))}
           </div>
 
-          <ul className="mt-10 space-y-3 border-t border-white/10 pt-8">
+          <ul className="mt-10 space-y-3 border-t border-foreground/20 pt-8">
             {demo.guarantees.map((guarantee) => (
               <li key={guarantee} className="flex items-start gap-3">
                 <Check className="mt-0.5 h-5 w-5 shrink-0" style={{ color: "#2ECFB1" }} />
-                <span className="text-sm text-white/60">{guarantee}</span>
+                <span className="text-sm text-foreground/60">{guarantee}</span>
               </li>
             ))}
           </ul>
@@ -92,11 +92,11 @@ export default function Demo() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
-          className="rounded-2xl border border-brand-mint/30 bg-[#080D1C] p-6"
+          className="rounded-2xl border border-brand-mint/40 bg-dark-card p-6 shadow-sm shadow-black/5"
         >
           <div className="mb-6 flex items-center gap-3">
             <Calendar className="h-5 w-5" style={{ color: "#2ECFB1" }} />
-            <p className="text-sm font-semibold text-white">Demo we.legal Suite · 30 minutos</p>
+            <p className="text-sm font-semibold text-foreground">Demo we.legal Suite · 30 minutos</p>
           </div>
 
           <CalendlyEmbed />

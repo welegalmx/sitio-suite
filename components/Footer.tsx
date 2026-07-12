@@ -3,12 +3,12 @@ import Logo from "./Logo";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-[#040812]">
+    <footer className="border-t border-white/10 bg-[#0A0F1E]">
       <div className="mx-auto max-w-6xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-4">
           <div>
             <a href="/" className="flex items-center">
-              <Logo heightPx={28} />
+              <Logo heightPx={28} dark />
             </a>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/45">
               {footer.tagline}

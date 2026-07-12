@@ -67,8 +67,8 @@ function ParticleField() {
         const a = particles[i];
 
         ctx.beginPath();
-        ctx.arc(a.x, a.y, 1.6, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${PARTICLE_RGB}, 0.8)`;
+        ctx.arc(a.x, a.y, 2.4, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${PARTICLE_RGB}, 1)`;
         ctx.fill();
 
         for (let j = i + 1; j < particles.length; j++) {
@@ -80,8 +80,8 @@ function ParticleField() {
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(${PARTICLE_RGB}, ${0.25 * (1 - dist / CONNECT_DISTANCE)})`;
-            ctx.lineWidth = 1;
+            ctx.strokeStyle = `rgba(${PARTICLE_RGB}, ${0.5 * (1 - dist / CONNECT_DISTANCE)})`;
+            ctx.lineWidth = 1.4;
             ctx.stroke();
           }
         }
@@ -119,7 +119,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <h1 className="text-4xl font-extrabold leading-[1.05] tracking-tight text-white md:text-6xl">
+          <h1 className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground md:text-6xl">
             {hero.headlineLines.map((line, i) => (
               <span key={i} className="block">
                 {renderHighlighted(line, hero.headlineHighlight)}
@@ -127,7 +127,7 @@ export default function Hero() {
             ))}
           </h1>
 
-          <p className="mt-6 max-w-md text-base leading-relaxed text-white/45 md:text-lg">
+          <p className="mt-6 max-w-md text-base leading-relaxed text-foreground/50 md:text-lg">
             {hero.subtitle}
           </p>
 
@@ -141,7 +141,7 @@ export default function Hero() {
             </a>
             <a
               href={hero.ctaSecondary.href}
-              className="rounded-full border border-white/15 px-7 py-3.5 text-sm font-semibold text-white/80 transition-colors hover:border-white/30 hover:text-white"
+              className="rounded-full border border-foreground/25 px-7 py-3.5 text-sm font-semibold text-foreground/80 transition-colors hover:border-foreground/45 hover:text-foreground"
             >
               {hero.ctaSecondary.label}
             </a>
@@ -152,22 +152,22 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
-          className="relative rounded-2xl border border-white/10 bg-dark-card/80 p-6 shadow-2xl shadow-black/40 backdrop-blur"
+          className="relative rounded-2xl border border-foreground/20 bg-dark-card/80 p-6 shadow-2xl shadow-black/15 backdrop-blur"
         >
           <div className="mb-5 flex items-center justify-between">
-            <p className="text-sm font-semibold text-white/70">Contratos</p>
-            <span className="text-xs text-white/40">Panel en vivo</span>
+            <p className="text-sm font-semibold text-foreground/70">Contratos</p>
+            <span className="text-xs text-foreground/40">Panel en vivo</span>
           </div>
 
           <div className="space-y-3">
             {contratos.mockups.map((item) => (
               <div
                 key={item.label}
-                className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.03] px-4 py-3"
+                className="flex items-center justify-between rounded-xl border border-foreground/15 bg-foreground/[0.06] px-4 py-3"
               >
                 <div>
-                  <p className="text-sm font-medium text-white">{item.label}</p>
-                  <p className="text-xs text-white/40">{item.detail}</p>
+                  <p className="text-sm font-medium text-foreground">{item.label}</p>
+                  <p className="text-xs text-foreground/40">{item.detail}</p>
                 </div>
                 <span
                   className="rounded-full px-3 py-1 text-xs font-semibold"

@@ -30,7 +30,7 @@ function SidebarButton({
     <button
       onClick={onClick}
       className={`w-full rounded-xl px-4 py-3 text-left text-sm font-medium transition-colors ${
-        active ? "text-white" : "text-white/60 hover:bg-white/5 hover:text-white"
+        active ? "text-white" : "text-foreground/60 hover:bg-foreground/8 hover:text-foreground"
       }`}
       style={active ? { background: "var(--gradient-brand)" } : undefined}
     >
@@ -54,15 +54,15 @@ export default function ModuleExplorer() {
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-mint">
             {modulesSection.eyebrow}
           </p>
-          <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+          <h2 className="font-display mt-4 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
             {modulesSection.headline}
           </h2>
-          <p className="mt-4 text-base text-white/45">{modulesSection.subtitle}</p>
+          <p className="mt-4 text-base text-foreground/50">{modulesSection.subtitle}</p>
         </div>
 
         <div className="mt-16 grid gap-8 lg:grid-cols-[280px_1fr]">
           <aside className="flex flex-col gap-1">
-            <p className="px-4 pb-2 text-xs font-semibold uppercase tracking-widest text-white/30">
+            <p className="px-4 pb-2 text-xs font-semibold uppercase tracking-widest text-foreground/30">
               Core
             </p>
             {coreModules.map((module) => (
@@ -74,9 +74,9 @@ export default function ModuleExplorer() {
               />
             ))}
 
-            <div className="my-4 border-t border-white/10" />
+            <div className="my-4 border-t border-foreground/20" />
 
-            <p className="px-4 pb-2 text-xs font-semibold uppercase tracking-widest text-white/30">
+            <p className="px-4 pb-2 text-xs font-semibold uppercase tracking-widest text-foreground/30">
               Premium
             </p>
             {premiumModules.map((module) => (
@@ -89,7 +89,7 @@ export default function ModuleExplorer() {
             ))}
           </aside>
 
-          <div className="relative min-h-[520px] overflow-hidden rounded-2xl border border-white/10 bg-dark-card/60 p-8 md:p-10">
+          <div className="relative min-h-[520px] overflow-hidden rounded-2xl border border-foreground/20 bg-dark-card/60 p-8 shadow-sm shadow-black/5 md:p-10">
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.id}
@@ -101,10 +101,10 @@ export default function ModuleExplorer() {
                 <p className="text-sm font-semibold uppercase tracking-widest text-brand-mint">
                   {active.name}
                 </p>
-                <h3 className="mt-3 text-2xl font-bold leading-snug text-white md:text-3xl">
+                <h3 className="font-display mt-3 text-2xl font-bold leading-snug text-foreground md:text-3xl">
                   {active.phrase}
                 </h3>
-                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/50 md:text-base">
+                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-foreground/50 md:text-base">
                   {active.description}
                 </p>
 
@@ -112,25 +112,25 @@ export default function ModuleExplorer() {
                   {active.capabilities.map((capability) => (
                     <span
                       key={capability}
-                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/70"
+                      className="rounded-full border border-foreground/20 bg-foreground/8 px-3 py-1.5 text-xs text-foreground/70"
                     >
                       {capability}
                     </span>
                   ))}
                 </div>
 
-                {note && <p className="mt-6 text-xs italic text-white/40">{note}</p>}
+                {note && <p className="mt-6 text-xs italic text-foreground/40">{note}</p>}
 
                 {hasMockups(active) && active.mockups.length > 0 && (
                   <div className="mt-8 space-y-3">
                     {active.mockups.map((item) => (
                       <div
                         key={item.label}
-                        className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.03] px-4 py-3"
+                        className="flex items-center justify-between rounded-xl border border-foreground/15 bg-foreground/[0.06] px-4 py-3"
                       >
                         <div>
-                          <p className="text-sm font-medium text-white">{item.label}</p>
-                          <p className="text-xs text-white/40">{item.detail}</p>
+                          <p className="text-sm font-medium text-foreground">{item.label}</p>
+                          <p className="text-xs text-foreground/40">{item.detail}</p>
                         </div>
                         <span
                           className="rounded-full px-3 py-1 text-xs font-semibold"

@@ -471,8 +471,8 @@ export const demo = {
     // Reemplazar YOUR_CALENDLY_URL con la URL real del evento de demo.
     url: "https://calendly.com/YOUR_CALENDLY_URL",
     primaryColor: "2ECFB1",
-    backgroundColor: "080d1c",
-    textColor: "ffffff",
+    backgroundColor: "f4f8ff",
+    textColor: "0a0f1e",
     fallbackEmail: "demo@welegal.mx",
   },
 };

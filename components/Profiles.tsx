@@ -14,23 +14,23 @@ function ProfileInfo({ profile }: { profile: Profile }) {
       <p className="text-xs font-semibold uppercase tracking-widest text-brand-mint">
         {profile.role}
       </p>
-      <h3 className="mt-2 text-2xl font-bold text-white">{profile.name}</h3>
-      <p className="mt-1 text-sm text-white/40">{profile.companyContext}</p>
+      <h3 className="font-display mt-2 text-2xl font-bold text-foreground">{profile.name}</h3>
+      <p className="mt-1 text-sm text-foreground/40">{profile.companyContext}</p>
 
-      <blockquote className="mt-6 border-l-2 border-brand-mint/60 pl-4 text-lg italic leading-relaxed text-white/70">
+      <blockquote className="mt-6 border-l-2 border-brand-mint/60 pl-4 text-lg italic leading-relaxed text-foreground/70">
         {profile.painPoints[0]}
       </blockquote>
 
       <div className="mt-6 space-y-1">
         {headingLines.map((line) => (
-          <p key={line} className="text-lg font-semibold leading-snug text-white">
+          <p key={line} className="text-lg font-semibold leading-snug text-foreground">
             {line}
           </p>
         ))}
       </div>
 
       {bodyLines.map((line) => (
-        <p key={line} className="mt-3 text-sm leading-relaxed text-white/50">
+        <p key={line} className="mt-3 text-sm leading-relaxed text-foreground/50">
           {line}
         </p>
       ))}
@@ -40,13 +40,13 @@ function ProfileInfo({ profile }: { profile: Profile }) {
 
 function BenefitsCard({ profile }: { profile: Profile }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-dark-card/60 p-8">
-      <p className="text-sm font-semibold text-white/70">Beneficios clave</p>
+    <div className="rounded-2xl border border-foreground/20 bg-dark-card/60 p-8 shadow-sm shadow-black/5">
+      <p className="text-sm font-semibold text-foreground/70">Beneficios clave</p>
       <ul className="mt-5 space-y-4">
         {profile.benefits.map((benefit) => (
           <li key={benefit} className="flex items-start gap-3">
             <Check className="mt-0.5 h-5 w-5 shrink-0" style={{ color: "#2ECFB1" }} />
-            <span className="text-sm leading-relaxed text-white/70">{benefit}</span>
+            <span className="text-sm leading-relaxed text-foreground/70">{benefit}</span>
           </li>
         ))}
       </ul>
@@ -58,7 +58,7 @@ export default function Profiles() {
   return (
     <section className="bg-dark-bg py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="mx-auto max-w-2xl text-center text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+        <h2 className="font-display mx-auto max-w-2xl text-center text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
           {profilesSection.headline}
         </h2>
 

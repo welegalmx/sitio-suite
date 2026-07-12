@@ -22,7 +22,7 @@ export default function Nav() {
     <header
       className="fixed inset-x-0 top-0 z-50 h-[68px] transition-colors duration-300"
       style={{
-        backgroundColor: scrolled ? "rgba(10, 15, 30, 0.92)" : "transparent",
+        backgroundColor: scrolled ? "rgba(255, 255, 255, 0.92)" : "transparent",
         backdropFilter: scrolled ? "blur(12px)" : "none",
         WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
       }}
@@ -37,7 +37,7 @@ export default function Nav() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-white/70 transition-colors hover:text-white"
+              className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
             >
               {link.label}
             </a>

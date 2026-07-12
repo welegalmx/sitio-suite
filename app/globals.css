@@ -7,8 +7,11 @@
   --brand-sky: #1daae1;
   --brand-blue: #2a88fe;
 
-  --dark-bg: #0a0f1e;
-  --dark-card: #0d1628;
+  /* Tema claro (feat/light-theme) — nombres heredados del tema oscuro original,
+     ahora contienen valores claros. bg-dark-bg / bg-dark-card siguen siendo
+     los tokens de "fondo principal" / "fondo card" en todo el sitio. */
+  --dark-bg: #ffffff;
+  --dark-card: #f4f8ff;
 
   --white: #ffffff;
   --black: #000000;
@@ -16,7 +19,7 @@
   --gradient-brand: linear-gradient(135deg, #2ecfb1 0%, #1daae1 50%, #2a88fe 100%);
 
   --background: var(--dark-bg);
-  --foreground: var(--white);
+  --foreground: #0a0f1e;
 }
 
 @theme inline {
@@ -28,7 +31,8 @@
   --color-dark-card: var(--dark-card);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-averta);
 }
 
 body {

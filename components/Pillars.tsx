@@ -19,7 +19,7 @@ export default function Pillars() {
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-mint">
             {pillarsSection.eyebrow}
           </p>
-          <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+          <h2 className="font-display mt-4 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
             {pillarsSection.headline}
           </h2>
         </div>
@@ -34,11 +34,11 @@ export default function Pillars() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.6, delay: index * 0.12, ease: "easeOut" }}
-                className="rounded-2xl border border-white/5 bg-white/[0.02] p-8"
+                className="rounded-2xl border border-foreground/15 bg-foreground/[0.05] p-8 shadow-sm shadow-black/5"
               >
-                <Icon className="h-10 w-10" style={{ color: "#2ECFB1" }} strokeWidth={1.5} />
-                <h3 className="mt-6 text-lg font-semibold text-white">{pillar.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/50">{pillar.copy}</p>
+                <Icon className="h-10 w-10" style={{ color: "#2ECFB1" }} strokeWidth={1.75} />
+                <h3 className="font-display mt-6 text-lg font-semibold text-foreground">{pillar.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-foreground/50">{pillar.copy}</p>
               </motion.div>
             );
           })}

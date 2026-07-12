@@ -32,10 +32,10 @@ export default function Comparison() {
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-mint">
             {comparison.eyebrow}
           </p>
-          <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+          <h2 className="font-display mt-4 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
             {comparison.headline}
           </h2>
-          <p className="mt-4 text-base text-white/45">{comparison.subtitle}</p>
+          <p className="mt-4 text-base text-foreground/50">{comparison.subtitle}</p>
         </div>
 
         <div className="mt-16 overflow-x-auto">
@@ -66,7 +66,7 @@ export default function Comparison() {
                 desfasando en cascada el resto de las celdas auto-ubicadas. */}
             <div />
             {comparison.columns.slice(0, lastColumn).map((col) => (
-              <div key={col} className="relative z-10 px-4 py-4 text-center text-sm font-semibold text-white/50">
+              <div key={col} className="relative z-10 px-4 py-4 text-center text-sm font-semibold text-foreground/50">
                 {col}
               </div>
             ))}
@@ -74,7 +74,7 @@ export default function Comparison() {
               className="relative z-10 px-4 py-4 text-center text-sm font-semibold"
               style={{ gridColumn: `${lastColumn + 2} / ${lastColumn + 3}`, gridRow: "1 / 2" }}
             >
-              <span className="text-gradient-brand">{comparison.columns[lastColumn]}</span>
+              <span className="font-display text-gradient-brand">{comparison.columns[lastColumn]}</span>
             </div>
 
             {/* filas */}
@@ -82,19 +82,19 @@ export default function Comparison() {
               const rowLine = rowIndex + 2;
               return (
                 <Fragment key={row.capability}>
-                  <div className="flex items-center border-t border-white/5 px-4 py-4 text-sm text-white/70">
+                  <div className="flex items-center border-t border-foreground/15 px-4 py-4 text-sm text-foreground/70">
                     {row.capability}
                   </div>
                   {row.values.slice(0, lastColumn).map((value, i) => (
                     <div
                       key={i}
-                      className="relative z-10 flex items-center justify-center border-t border-white/5 px-4 py-4"
+                      className="relative z-10 flex items-center justify-center border-t border-foreground/15 px-4 py-4"
                     >
                       <CoverageIcon value={value} />
                     </div>
                   ))}
                   <div
-                    className="relative z-10 flex items-center justify-center border-t border-white/5 px-4 py-4"
+                    className="relative z-10 flex items-center justify-center border-t border-foreground/15 px-4 py-4"
                     style={{
                       gridColumn: `${lastColumn + 2} / ${lastColumn + 3}`,
                       gridRow: `${rowLine} / ${rowLine + 1}`,
@@ -108,7 +108,7 @@ export default function Comparison() {
           </motion.div>
         </div>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-6 text-xs text-white/40">
+        <div className="mt-8 flex flex-wrap justify-center gap-6 text-xs text-foreground/40">
           <span className="flex items-center gap-2">
             <CheckCircle2 className="h-4 w-4" style={{ color: coverageColor.full }} />
             {comparison.legend.full.replace("✓ ", "")}
