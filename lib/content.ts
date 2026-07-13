@@ -58,7 +58,7 @@ export const pillars: Pillar[] = [
   {
     id: "ai-native",
     title: "AI Native",
-    copy: "Tu empresa tiene información valiosa dispersa en contratos, expedientes y documentos. El Abogado AI de we.legal conoce todo tu workspace y la hace accesible al instante — sin buscar, sin depender de otra persona, desde el chat o desde WhatsApp.",
+    copy: "La IA no es un complemento. Es el motor que impulsa toda la plataforma. Cada módulo incorpora capacidades inteligentes para reducir trabajo manual, acelerar procesos y ofrecer información contextualizada en tiempo real.",
   },
   {
     id: "ocr-ai",
@@ -68,7 +68,7 @@ export const pillars: Pillar[] = [
   {
     id: "firma-electronica",
     title: "Firma electrónica avanzada NOM-151",
-    copy: "Firma integrada con DigiD México. Cumple NOM-151 con plena validez legal. Seguimiento por firmante en tiempo real — pendiente, firmado o rechazado — sin salir de la plataforma.",
+    copy: "Gestiona todo el proceso de firma desde una sola plataforma. Envía documentos a firma, consulta el avance de cada firmante y accede al documento firmado y sus evidencias, con cumplimiento de la NOM-151 y plena validez jurídica.",
   },
   {
     id: "alertas",
@@ -81,8 +81,48 @@ export const pillars: Pillar[] = [
 
 export const modulesSection = {
   eyebrow: "La plataforma",
-  headline: "Seis módulos core. Tres funcionalidades premium. Una sola plataforma.",
+  headline: "Cinco módulos core. Una sola plataforma.",
   subtitle: "Cada módulo habla con los demás. El Abogado AI los conoce a todos.",
+};
+
+export const premiumSection = {
+  eyebrow: "Funcionalidades premium",
+  headline: "Inteligencia que potencia toda la operación.",
+  subtitle:
+    "Capacidades avanzadas que se suman a los módulos core para llevar tu operación legal al siguiente nivel.",
+};
+
+// --- ASISTENTE WHATSAPP ----------------------------------------------------
+
+export interface ChatMessage {
+  role: "user" | "assistant";
+  text: string;
+}
+
+export const whatsappSection = {
+  eyebrow: "Abogado AI por WhatsApp",
+  headline: "Tu asistente legal, en el chat que ya usas.",
+  subtitle:
+    "Consulta contratos, vencimientos, expedientes y documentos de tu empresa directamente por WhatsApp — sin abrir la plataforma y con respuestas en segundos.",
+  highlights: [
+    "Consultas en lenguaje natural sobre tu operación legal",
+    "Respuestas contextualizadas con la información de tu workspace",
+    "Disponible siempre, sin instalar nada nuevo",
+  ],
+  disclaimer: "El Abogado AI es una herramienta de acceso a información. No constituye asesoría legal.",
+  contactName: "We.legal Suite Assistant",
+  conversation: [
+    { role: "user", text: "¿Cuándo vence el arrendamiento de Polanco?" },
+    {
+      role: "assistant",
+      text: "Vence el 15 de septiembre — en 3 días. ¿Activo una alerta o preparo la renovación?",
+    },
+    { role: "user", text: "Prepárame la renovación" },
+    {
+      role: "assistant",
+      text: "Listo ✅ Generé el borrador con los datos de la contraparte y las cláusulas vigentes. Lo dejé en Contratos para tu revisión.",
+    },
+  ] as ChatMessage[],
 };
 
 export interface CoreModule {
@@ -98,19 +138,10 @@ export const coreModules: CoreModule[] = [
   {
     id: "contratos",
     name: "Contratos",
-    phrase:
-      "Gestiona y analiza todos tus contratos con IA — del borrador a la firma, con control total del ciclo de vida.",
+    phrase: "Gestiona y analiza todos tus contratos con IA.",
     description:
       "Creación, versionado, análisis con IA (score de riesgo 0–100, cláusulas faltantes, penas convencionales), firma electrónica NOM-151 y alertas automáticas de vencimiento.",
-    capabilities: [
-      "Análisis IA con score de riesgo 0–100",
-      "Detección de cláusulas faltantes y penas convencionales",
-      "Versionado con historial completo de cambios",
-      "Firma electrónica avanzada NOM-151 integrada",
-      "Alertas automáticas de vencimiento por email",
-      "Expedientes de contrapartes con KYC",
-      "Renovación automática configurable",
-    ],
+    capabilities: [],
     mockups: [
       {
         label: "Arrendamiento Oficinas Polanco",
@@ -135,14 +166,7 @@ export const coreModules: CoreModule[] = [
     phrase: "Toda la estructura legal de tu empresa, siempre accesible.",
     description:
       "Razón social, RFC, objeto social, capital social, accionistas con porcentajes, consejo de administración, comisarios, representantes legales, poderes notariales y actas de asamblea. Todo en un solo lugar, sin depender del despacho externo.",
-    capabilities: [
-      "Estructura accionaria con porcentajes y series",
-      "Consejo de administración y comisarios",
-      "Poderes notariales y representantes legales",
-      "Actas de asamblea ordinarias y extraordinarias",
-      "Estatutos y reformas corporativas",
-      "Cumplimiento LGSM",
-    ],
+    capabilities: [],
     mockups: [
       {
         label: "Acta Asamblea Extraordinaria",
@@ -167,14 +191,7 @@ export const coreModules: CoreModule[] = [
     phrase: "Toda la información laboral de tu equipo, accesible y completa.",
     description:
       "Expediente digital completo de cada empleado — datos personales, laborales y de nómina. Portal del empleado con acceso a sus documentos y solicitudes. Importación masiva desde Excel.",
-    capabilities: [
-      "CURP, RFC, NSS, datos de contacto y beneficiarios",
-      "Puesto, departamento, fecha de ingreso, tipo de contrato",
-      "Salario, SBC, CLABE, banco y prestaciones",
-      "Portal del empleado con centro de solicitudes",
-      "Importación masiva desde Excel",
-      "Cumplimiento LFT e IMSS",
-    ],
+    capabilities: [],
     mockups: [
       {
         label: "García López, Mariana",
@@ -199,13 +216,7 @@ export const coreModules: CoreModule[] = [
     phrase: "Ningún permiso vence sin que lo sepas.",
     description:
       "Gestión de expedientes ante autoridades federales y locales. Seguimiento por etapas, alertas automáticas de vencimiento y archivo completo de documentos del expediente.",
-    capabilities: [
-      "SEMARNAT, STPS, SAT, Protección Civil, COFEPRIS y más",
-      "Seguimiento por etapas del trámite",
-      "Alertas automáticas de vencimiento configurables",
-      "Archivo de documentos por expediente",
-      "Historial completo de actualizaciones",
-    ],
+    capabilities: [],
     mockups: [
       {
         label: "Licencia Ambiental SEMARNAT",
@@ -230,13 +241,7 @@ export const coreModules: CoreModule[] = [
     phrase: "Todos tus procedimientos legales activos, con visibilidad ejecutiva.",
     description:
       "Gestión de procedimientos judiciales y extrajudiciales. Actos procesales, cuantía reclamada, provisión contable y evaluación de riesgo. Para que la dirección sepa en todo momento cuál es la exposición legal de la empresa.",
-    capabilities: [
-      "Procedimientos judiciales y extrajudiciales",
-      "Registro de actos procesales y fechas críticas",
-      "Cuantía reclamada y provisión contable",
-      "Evaluación de riesgo por expediente",
-      "Visibilidad ejecutiva de la exposición total",
-    ],
+    capabilities: [],
     mockups: [
       {
         label: "Juicio Laboral — Ex Empleado",
@@ -249,21 +254,6 @@ export const coreModules: CoreModule[] = [
         badge: { text: "En curso", color: "amber" },
       },
     ],
-  },
-  {
-    id: "firma-electronica",
-    name: "Firma electrónica",
-    phrase: "Firma con validez legal desde la plataforma, sin salir de ella.",
-    description:
-      "Integración con DigiD México. Firma electrónica avanzada con plena validez legal en México bajo NOM-151. Seguimiento por firmante en tiempo real, integrada en el flujo de contratos.",
-    capabilities: [
-      "Firma electrónica avanzada — DigiD México",
-      "Cumplimiento NOM-151",
-      "Tracking por firmante: pendiente / firmado / rechazado",
-      "Integrada en el flujo de contratos",
-      "Notificación automática al completarse",
-    ],
-    mockups: [],
   },
 ];
 
@@ -433,7 +423,7 @@ export const comparison = {
 // --- DEMO --------------------------------------------------------------------
 
 export interface DemoHighlight {
-  emoji: string;
+  icon: "contracts" | "ai" | "corporate" | "reports";
   text: string;
 }
 
@@ -444,19 +434,19 @@ export const demo = {
   subtitle: "Te mostramos la plataforma con datos reales. Sin presentaciones genéricas. Sin compromiso.",
   highlights: [
     {
-      emoji: "📋",
+      icon: "contracts",
       text: "Tu flujo de contratos completo — desde la creación hasta la firma electrónica NOM-151, con análisis IA en tiempo real",
     },
     {
-      emoji: "🤖",
+      icon: "ai",
       text: "El Abogado AI en acción — consultas sobre contratos, empleados y trámites. También vía WhatsApp",
     },
     {
-      emoji: "🏛️",
+      icon: "corporate",
       text: "Estructura corporativa y RRHH — documentos corporativos, expedientes de empleados y permisos ante autoridades",
     },
     {
-      emoji: "📊",
+      icon: "reports",
       text: "Dashboard ejecutivo y reportes — el estado legal de tu empresa de un vistazo, generado con IA",
     },
   ] as DemoHighlight[],
@@ -467,8 +457,7 @@ export const demo = {
     "Confirmación en menos de 2 horas hábiles",
   ],
   calendly: {
-    // Reemplazar YOUR_CALENDLY_URL con la URL real del evento de demo.
-    url: "https://calendly.com/YOUR_CALENDLY_URL",
+    url: "https://calendly.com/welegal-info/demo-we-legal-suite",
     primaryColor: "2ECFB1",
     backgroundColor: "f4f8ff",
     textColor: "0a0f1e",

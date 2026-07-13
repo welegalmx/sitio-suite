@@ -3,11 +3,27 @@
 import { useEffect, useRef, useState } from "react";
 import Script from "next/script";
 import { motion } from "framer-motion";
-import { Check, Calendar } from "lucide-react";
-import { demo } from "@/lib/content";
+import {
+  Check,
+  Calendar,
+  FileSignature,
+  Sparkles,
+  Building2,
+  BarChart3,
+  type LucideIcon,
+} from "lucide-react";
+import { demo, type DemoHighlight } from "@/lib/content";
 import { renderHighlighted } from "@/lib/highlight-text";
 
 const FALLBACK_TIMEOUT_MS = 4000;
+
+// Mapea cada highlight de la demo a su ícono de lucide.
+const HIGHLIGHT_ICONS: Record<DemoHighlight["icon"], LucideIcon> = {
+  contracts: FileSignature,
+  ai: Sparkles,
+  corporate: Building2,
+  reports: BarChart3,
+};
 
 function CalendlyEmbed() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -69,12 +85,17 @@ export default function Demo() {
           <p className="mt-4 text-base text-foreground/50">{demo.subtitle}</p>
 
           <div className="mt-10 space-y-5">
-            {demo.highlights.map((item) => (
-              <div key={item.text} className="flex items-start gap-4">
-                <span className="text-2xl leading-none">{item.emoji}</span>
-                <p className="text-sm leading-relaxed text-foreground/70">{item.text}</p>
-              </div>
-            ))}
+            {demo.highlights.map((item) => {
+              const Icon = HIGHLIGHT_ICONS[item.icon];
+              return (
+                <div key={item.text} className="flex items-start gap-4">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-mint/12 text-brand-mint">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <p className="text-sm leading-relaxed text-foreground/70">{item.text}</p>
+                </div>
+              );
+            })}
           </div>
 
           <ul className="mt-10 space-y-3 border-t border-foreground/20 pt-8">

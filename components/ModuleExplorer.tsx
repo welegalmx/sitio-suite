@@ -8,24 +8,12 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import {
-  modulesSection,
-  coreModules,
-  premiumModules,
-  type CoreModule,
-  type PremiumModule,
-} from "@/lib/content";
+import { modulesSection, coreModules, type CoreModule } from "@/lib/content";
 import { badgeBg, badgeText } from "@/lib/badge-colors";
 
-type ModuleItem = CoreModule | PremiumModule;
-
-function hasMockups(module: ModuleItem): module is CoreModule {
-  return "mockups" in module;
-}
-
-// El scrollytelling recorre los módulos en el mismo orden que la sidebar:
-// core primero, premium después.
-const allModules: ModuleItem[] = [...coreModules, ...premiumModules];
+// El scrollytelling recorre los módulos core en el mismo orden que la sidebar.
+// (Las funcionalidades premium viven en su propia sección.)
+const allModules: CoreModule[] = coreModules;
 const MODULE_COUNT = allModules.length;
 const DESKTOP_QUERY = "(min-width: 768px)";
 
@@ -65,9 +53,7 @@ function SidebarButton({
   );
 }
 
-function ModulePanel({ active }: { active: ModuleItem }) {
-  const note = "note" in active ? active.note : undefined;
-
+function ModulePanel({ active }: { active: CoreModule }) {
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -87,20 +73,20 @@ function ModulePanel({ active }: { active: ModuleItem }) {
           {active.description}
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-2">
-          {active.capabilities.map((capability) => (
-            <span
-              key={capability}
-              className="rounded-full border border-foreground/20 bg-foreground/8 px-3 py-1.5 text-xs text-foreground/70"
-            >
-              {capability}
-            </span>
-          ))}
-        </div>
+        {active.capabilities.length > 0 && (
+          <div className="mt-6 flex flex-wrap gap-2">
+            {active.capabilities.map((capability) => (
+              <span
+                key={capability}
+                className="rounded-full border border-foreground/20 bg-foreground/8 px-3 py-1.5 text-xs text-foreground/70"
+              >
+                {capability}
+              </span>
+            ))}
+          </div>
+        )}
 
-        {note && <p className="mt-6 text-xs italic text-foreground/40">{note}</p>}
-
-        {hasMockups(active) && active.mockups.length > 0 && (
+        {active.mockups.length > 0 && (
           <div className="mt-8 space-y-3">
             {active.mockups.map((item) => (
               <div
@@ -195,30 +181,33 @@ export default function ModuleExplorer() {
 
   return (
     <section id="modulos" className="bg-dark-bg py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-mint">
-            {modulesSection.eyebrow}
-          </p>
-          <h2 className="font-display mt-4 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
-            {modulesSection.headline}
-          </h2>
-          <p className="mt-4 text-base text-foreground/50">{modulesSection.subtitle}</p>
-        </div>
-      </div>
-
       <div
         ref={containerRef}
-        className="mt-16"
         style={isDesktop ? { height: `${MODULE_COUNT * 100}vh` } : undefined}
       >
-        <div className={isDesktop ? "sticky top-0 flex h-screen items-center" : ""}>
+        {/* El encabezado vive dentro del sticky, centrado como grupo junto con el
+            explorador de módulos, para que queden cerca (antes el panel centrado
+            dejaba un hueco grande respecto al encabezado). */}
+        <div
+          className={
+            isDesktop
+              ? "sticky top-0 flex h-screen flex-col items-center justify-center gap-8 pt-16"
+              : "flex flex-col gap-8"
+          }
+        >
+          <div className="mx-auto max-w-2xl px-6 text-center">
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-mint">
+              {modulesSection.eyebrow}
+            </p>
+            <h2 className="font-display mt-4 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
+              {modulesSection.headline}
+            </h2>
+            <p className="mt-4 text-base text-foreground/50">{modulesSection.subtitle}</p>
+          </div>
+
           <div className="mx-auto w-full max-w-6xl px-6">
             <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
               <aside className="flex flex-col gap-1">
-                <p className="px-4 pb-2 text-xs font-semibold uppercase tracking-widest text-foreground/30">
-                  Core
-                </p>
                 {coreModules.map((module, i) => (
                   <SidebarButton
                     key={module.id}
@@ -227,26 +216,9 @@ export default function ModuleExplorer() {
                     onClick={() => scrollToModule(i)}
                   />
                 ))}
-
-                <div className="my-4 border-t border-foreground/20" />
-
-                <p className="px-4 pb-2 text-xs font-semibold uppercase tracking-widest text-foreground/30">
-                  Premium
-                </p>
-                {premiumModules.map((module, i) => {
-                  const index = coreModules.length + i;
-                  return (
-                    <SidebarButton
-                      key={module.id}
-                      label={module.name}
-                      active={index === activeIndex}
-                      onClick={() => scrollToModule(index)}
-                    />
-                  );
-                })}
               </aside>
 
-              <div className="relative min-h-[520px] overflow-hidden rounded-2xl border border-foreground/20 bg-dark-card/60 p-8 shadow-sm shadow-black/5 md:p-10">
+              <div className="relative min-h-[460px] overflow-hidden rounded-2xl border border-foreground/20 bg-dark-card/60 p-8 shadow-sm shadow-black/5 md:p-10">
                 <ModulePanel active={active} />
               </div>
             </div>
