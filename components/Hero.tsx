@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { hero, coreModules } from "@/lib/content";
-import { badgeBg, badgeText } from "@/lib/badge-colors";
+import { hero } from "@/lib/content";
 import { renderHighlighted } from "@/lib/highlight-text";
 
 const PARTICLE_COUNT = 60;
@@ -104,16 +103,62 @@ function ParticleField() {
   return <canvas ref={canvasRef} className="absolute inset-0" />;
 }
 
-export default function Hero() {
-  const contratos = coreModules.find((m) => m.id === "contratos")!;
+// Clips del hero, en orden de reproducción. Corren uno tras otro en bucle.
+// Para agregar más, sube los .mp4 (H.264, formato cuadrado ~1:1) a public/hero/
+// y añádelos a esta lista en el orden deseado.
+const HERO_VIDEOS = ["/hero/hero-1.mp4", "/hero/hero-2.mp4", "/hero/hero-3.mp4"];
 
+function HeroVideos() {
+  const [index, setIndex] = useState(0);
+  const refs = useRef<(HTMLVideoElement | null)[]>([]);
+  const single = HERO_VIDEOS.length === 1;
+
+  // Crossfade: los clips se apilan y solo el activo está a opacity-100. Al
+  // terminar uno, se arranca el siguiente desde 0 y ambos se funden (fade) por
+  // la transición de opacidad, evitando el corte seco y el parpadeo de carga.
+  const handleEnded = (endedIndex: number) => {
+    if (single || endedIndex !== index) return;
+    const next = (index + 1) % HERO_VIDEOS.length;
+    const nextVideo = refs.current[next];
+    if (nextVideo) {
+      nextVideo.currentTime = 0;
+      nextVideo.play().catch(() => {});
+    }
+    setIndex(next);
+  };
+
+  return (
+    <div className="relative aspect-square">
+      {HERO_VIDEOS.map((src, i) => (
+        <video
+          key={src}
+          ref={(el) => {
+            refs.current[i] = el;
+          }}
+          src={src}
+          autoPlay={i === 0}
+          muted
+          playsInline
+          loop={single}
+          preload="auto"
+          onEnded={() => handleEnded(i)}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-in-out ${
+            i === index ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      ))}
+    </div>
+  );
+}
+
+export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-dark-bg pt-[68px]">
       <div className="pointer-events-none absolute inset-0">
         <ParticleField />
       </div>
 
-      <div className="relative mx-auto grid max-w-6xl gap-16 px-6 py-24 md:grid-cols-2 md:items-center md:py-32">
+      <div className="relative mx-auto grid max-w-7xl gap-16 px-6 py-24 md:grid-cols-2 md:items-center md:py-32">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -152,35 +197,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
-          className="relative rounded-2xl border border-foreground/20 bg-dark-card/80 p-6 shadow-2xl shadow-black/15 backdrop-blur"
+          className="mx-auto w-full max-w-[580px] overflow-hidden rounded-2xl border border-foreground/20 shadow-2xl shadow-black/15"
         >
-          <div className="mb-5 flex items-center justify-between">
-            <p className="text-sm font-semibold text-foreground/70">Contratos</p>
-            <span className="text-xs text-foreground/40">Panel en vivo</span>
-          </div>
-
-          <div className="space-y-3">
-            {contratos.mockups.map((item) => (
-              <div
-                key={item.label}
-                className="flex items-center justify-between rounded-xl border border-foreground/15 bg-foreground/[0.06] px-4 py-3"
-              >
-                <div>
-                  <p className="text-sm font-medium text-foreground">{item.label}</p>
-                  <p className="text-xs text-foreground/40">{item.detail}</p>
-                </div>
-                <span
-                  className="rounded-full px-3 py-1 text-xs font-semibold"
-                  style={{
-                    color: badgeText[item.badge.color],
-                    backgroundColor: badgeBg[item.badge.color],
-                  }}
-                >
-                  {item.badge.text}
-                </span>
-              </div>
-            ))}
-          </div>
+          <HeroVideos />
         </motion.div>
       </div>
     </section>

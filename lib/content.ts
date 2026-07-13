@@ -23,11 +23,10 @@ export interface Link {
 
 export const nav = {
   logo: "we.legal suite",
-  links: [
-    { label: "Módulos", href: "#modulos" },
-    { label: "Abogado AI", href: "#abogado-ai" },
-    { label: "Por qué we.legal", href: "#por-que-welegal" },
-  ] satisfies Link[],
+  // Links de sección del nav. Se retiraron "Módulos" y "Abogado AI" a pedido;
+  // el menú ahora solo muestra logo + CTA. Si en el futuro se quiere un link de
+  // sección, se agrega aquí y el Nav lo renderiza automáticamente.
+  links: [] as Link[],
   cta: { label: "Agenda tu demo →", href: "#demo" } satisfies Link,
 };
 
@@ -37,7 +36,7 @@ export const hero = {
   headlineLines: ["La operación legal", "de tu empresa,", "toda en un solo lugar."],
   headlineHighlight: "un solo lugar",
   subtitle:
-    "Contratos, documentos corporativos, equipo, litigios y un Abogado AI que conoce tu empresa por dentro. Sin carpetas dispersas. Sin vencimientos perdidos. Sin incertidumbre.",
+    "El Legal Intelligence Engine que centraliza, entiende y gestiona toda la operación legal de tu empresa o despacho. Conoce tus documentos, procesos, equipos y riesgos para ayudarte a tomar mejores decisiones.",
   ctaPrimary: { label: "Agenda tu demo gratis →", href: "#demo" } satisfies Link,
   ctaSecondary: { label: "Ver la plataforma", href: "#modulos" } satisfies Link,
 };

@@ -14,9 +14,8 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // El nav solo muestra los dos links de texto; "Por qué we.legal" queda
-  // para cuando exista esa sección, y el CTA se renderiza aparte.
-  const textLinks = nav.links.slice(0, 2);
+  // Links de sección del nav (actualmente ninguno); el CTA va aparte.
+  const textLinks = nav.links;
 
   return (
     <header

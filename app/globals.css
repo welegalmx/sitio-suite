@@ -46,4 +46,20 @@ body {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+  /* Cuando el span envuelve a más de una línea (p. ej. "un solo lugar"
+     partiéndose entre "solo" y "lugar"), sin esto el navegador recorta el
+     degradado contra la caja combinada de ambas líneas y puede cortar
+     glifos justo en el punto de salto — por eso se veía la "r" de "lugar"
+     mutilada. Con "clone" cada línea envuelta recibe su propio degradado
+     completo, eliminando el recorte. */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  /* Averta Std ExtraBold/Black tiene glifos redondeados (p. ej. la "r")
+     cuya tinta se extiende un poco más allá de su ancho de avance lógico.
+     background-clip: text recorta el degradado contra la caja de avance,
+     así que sin este padding el último carácter del span pierde ese
+     sobresaliente — se veía como la "r" cortada. El margin negativo
+     compensa para no desplazar el texto que sigue (el punto ".").  */
+  padding-right: 0.15em;
+  margin-right: -0.15em;
 }
