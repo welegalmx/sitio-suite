@@ -258,11 +258,8 @@ export default function PremiumSection() {
           >
             <div className="flex h-full flex-col rounded-[calc(1.5rem-1px)] bg-dark-bg p-8 md:p-10">
               <div className="flex items-center gap-4">
-                <div
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-white"
-                  style={{ background: "var(--gradient-brand)" }}
-                >
-                  <Sparkles className="h-6 w-6" />
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-mint/12 text-brand-mint">
+                  <Sparkles className="h-5 w-5" />
                 </div>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-widest text-brand-mint">
