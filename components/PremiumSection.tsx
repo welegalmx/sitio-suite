@@ -165,7 +165,7 @@ function AbogadoDemo() {
   }, [phase]);
 
   return (
-    <div className="mt-6 flex flex-1 flex-col overflow-hidden rounded-2xl border border-foreground/12 bg-foreground/[0.03] p-4">
+    <div className="mt-6 flex h-[440px] flex-col overflow-hidden rounded-2xl border border-foreground/12 bg-foreground/[0.03] p-4 lg:h-auto lg:flex-1">
       {/* El chat se ancla al fondo (junto al input), como una UI real: los
           mensajes suben desde abajo y el espacio libre queda arriba. */}
       <div className="flex flex-1 flex-col justify-end gap-2.5 overflow-hidden">
