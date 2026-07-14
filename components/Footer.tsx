@@ -14,8 +14,14 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="mt-12 border-t border-white/10 pt-8 text-center text-xs text-white/35">
-          {footer.credit}
+        <div className="mt-12 flex flex-col items-center gap-2.5 border-t border-white/10 pt-8 text-center">
+          <p className="text-xs text-white/35">{footer.credit}</p>
+          <a
+            href={footer.registro.href}
+            className="text-xs text-white/30 underline underline-offset-4 transition-colors hover:text-brand-mint"
+          >
+            {footer.registro.label}
+          </a>
         </div>
       </div>
     </footer>

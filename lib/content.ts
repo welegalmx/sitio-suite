@@ -28,6 +28,8 @@ export const nav = {
   // sección, se agrega aquí y el Nav lo renderiza automáticamente.
   links: [] as Link[],
   cta: { label: "Agenda tu demo →", href: "#demo" } satisfies Link,
+  // Acceso a la aplicación (la suite). Externo.
+  suiteCta: { label: "Ir a la suite", href: "https://suite.welegal.mx" } satisfies Link,
 };
 
 // --- HERO ----------------------------------------------------------------
@@ -165,7 +167,7 @@ export const coreModules: CoreModule[] = [
     name: "Documentos corporativos",
     phrase: "Toda la estructura legal de tu empresa, siempre accesible.",
     description:
-      "Razón social, RFC, objeto social, capital social, accionistas con porcentajes, consejo de administración, comisarios, representantes legales, poderes notariales y actas de asamblea. Todo en un solo lugar, sin depender del despacho externo.",
+      "Razón social, RFC, objeto social, capital social, accionistas con porcentajes, consejo de administración, comisarios, representantes legales, poderes notariales y actas de asamblea. Toda la estructura societaria de tu empresa, ordenada, vigente y a la mano cuando la necesites.",
     capabilities: [],
     mockups: [
       {
@@ -353,7 +355,7 @@ export const profiles: Profile[] = [
       "Alertas automáticas que no dependen de que alguien recuerde",
       "Abogado AI que responde las consultas operativas del día a día",
       "Visibilidad de litigios con exposición económica consolidada",
-      "Acceso a documentos corporativos sin depender del despacho externo",
+      "Documentos corporativos completos y actualizados, disponibles al instante",
     ],
   },
   {
@@ -511,4 +513,6 @@ export const footer = {
     },
   ] as FooterColumn[],
   credit: "© 2026 we.legal Suite · 🇲🇽 Hecho en México · suite.welegal.mx",
+  // Link discreto de acceso al registro de marca (externo).
+  registro: { label: "Ir a registro de marca", href: "https://welegal.mx/auth/login" },
 };
