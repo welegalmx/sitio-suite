@@ -103,22 +103,23 @@ function ParticleField() {
   return <canvas ref={canvasRef} className="absolute inset-0" />;
 }
 
-// Clips del hero, en orden de reproducción. Corren uno tras otro en bucle.
-// Para agregar más, sube los .mp4 (H.264, formato cuadrado ~1:1) a public/hero/
-// y añádelos a esta lista en el orden deseado.
-const HERO_VIDEOS = ["/hero/hero-1.mp4", "/hero/hero-2.mp4", "/hero/hero-3.mp4"];
+// Videos de fondo full-bleed del hero (H.264). Corren uno tras otro en bucle
+// con crossfade. object-cover recorta al centro. Para agregar/quitar, edita
+// esta lista con los .mp4 en public/hero/ en el orden deseado.
+const HERO_BG_VIDEOS = ["/hero/hero-bg.mp4", "/hero/hero-bg-2.mp4"];
 
-function HeroVideos() {
+function HeroBackground() {
   const [index, setIndex] = useState(0);
   const refs = useRef<(HTMLVideoElement | null)[]>([]);
-  const single = HERO_VIDEOS.length === 1;
+  const single = HERO_BG_VIDEOS.length === 1;
 
   // Crossfade: los clips se apilan y solo el activo está a opacity-100. Al
-  // terminar uno, se arranca el siguiente desde 0 y ambos se funden (fade) por
-  // la transición de opacidad, evitando el corte seco y el parpadeo de carga.
+  // terminar uno, se arranca el siguiente desde 0 (ya reproduciéndose) y ambos
+  // se funden por la transición de opacidad, evitando el corte seco y el
+  // parpadeo de carga.
   const handleEnded = (endedIndex: number) => {
     if (single || endedIndex !== index) return;
-    const next = (index + 1) % HERO_VIDEOS.length;
+    const next = (index + 1) % HERO_BG_VIDEOS.length;
     const nextVideo = refs.current[next];
     if (nextVideo) {
       nextVideo.currentTime = 0;
@@ -128,8 +129,8 @@ function HeroVideos() {
   };
 
   return (
-    <div className="relative aspect-square">
-      {HERO_VIDEOS.map((src, i) => (
+    <>
+      {HERO_BG_VIDEOS.map((src, i) => (
         <video
           key={src}
           ref={(el) => {
@@ -147,24 +148,39 @@ function HeroVideos() {
           }`}
         />
       ))}
-    </div>
+    </>
   );
 }
 
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-dark-bg pt-[68px]">
+      {/* Videos de fondo full-bleed (crossfade en bucle) */}
+      <HeroBackground />
+
+      {/* Overlay oscuro degradado: más denso a la izquierda (donde va el texto)
+          para legibilidad, y más ligero a la derecha para dejar ver el video. */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(100deg, rgba(6,11,24,0.92) 0%, rgba(6,11,24,0.7) 45%, rgba(6,11,24,0.4) 100%)",
+        }}
+      />
+
+      {/* Partículas de marca sobre el video */}
       <div className="pointer-events-none absolute inset-0">
         <ParticleField />
       </div>
 
-      <div className="relative mx-auto grid max-w-7xl gap-16 px-6 py-24 md:grid-cols-2 md:items-center md:py-32">
+      <div className="relative mx-auto max-w-7xl px-6 py-28 md:py-40">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
+          className="max-w-2xl"
         >
-          <h1 className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground md:text-6xl">
+          <h1 className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-white md:text-6xl">
             {hero.headlineLines.map((line, i) => (
               <span key={i} className="block">
                 {renderHighlighted(line, hero.headlineHighlight)}
@@ -172,7 +188,7 @@ export default function Hero() {
             ))}
           </h1>
 
-          <p className="mt-6 max-w-md text-base leading-relaxed text-foreground/50 md:text-lg">
+          <p className="mt-6 max-w-md text-base leading-relaxed text-white/70 md:text-lg">
             {hero.subtitle}
           </p>
 
@@ -186,20 +202,11 @@ export default function Hero() {
             </a>
             <a
               href={hero.ctaSecondary.href}
-              className="rounded-full border border-foreground/25 px-7 py-3.5 text-sm font-semibold text-foreground/80 transition-colors hover:border-foreground/45 hover:text-foreground"
+              className="rounded-full border border-white/30 px-7 py-3.5 text-sm font-semibold text-white/80 transition-colors hover:border-white/55 hover:text-white"
             >
               {hero.ctaSecondary.label}
             </a>
           </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
-          className="mx-auto w-full max-w-[580px] overflow-hidden rounded-2xl border border-foreground/20 shadow-2xl shadow-black/15"
-        >
-          <HeroVideos />
         </motion.div>
       </div>
     </section>
