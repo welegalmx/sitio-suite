@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-const SITE_URL = "https://suite.welegal.mx";
+const SITE_URL = "https://welegal.mx";
 
 // Tipografía de marca (Brand Guidelines POLVO ROSA, julio 2026):
 // Averta Std para headlines, DM Sans para body.

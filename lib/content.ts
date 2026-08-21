@@ -512,7 +512,7 @@ export const footer = {
       ],
     },
   ] as FooterColumn[],
-  credit: "© 2026 we.legal Suite · 🇲🇽 Hecho en México · suite.welegal.mx",
+  credit: "© 2026 we.legal Suite · 🇲🇽 Hecho en México · welegal.mx",
   // Link discreto de acceso al registro de marca (externo).
   registro: { label: "Ir a registro de marca", href: "https://welegal.mx/auth/login" },
 };

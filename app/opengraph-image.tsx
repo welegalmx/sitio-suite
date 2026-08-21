@@ -76,7 +76,7 @@ export default function OpengraphImage() {
             color: "rgba(255,255,255,0.5)",
           }}
         >
-          suite.welegal.mx
+          welegal.mx
         </div>
       </div>
     ),

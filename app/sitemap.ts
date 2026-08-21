@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = "https://suite.welegal.mx";
+const BASE_URL = "https://welegal.mx";
 
 // Sitio de una sola página (landing). Al agregar rutas nuevas, súmalas aquí.
 export default function sitemap(): MetadataRoute.Sitemap {
