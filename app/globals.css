@@ -2,7 +2,7 @@
 
 :root {
   /* Marca — we.legal Suite (Brandbook Julio 2026) */
-  --brand-mint: #2ecfb1;
+  --brand-mint: #2dcfb1;
   --brand-teal: #22bcc8;
   --brand-sky: #1daae1;
   --brand-blue: #2a88fe;
@@ -18,7 +18,7 @@
 
   --gradient-brand: linear-gradient(
     135deg,
-    #2ecfb1 0%,
+    #2dcfb1 0%,
     #1daae1 50%,
     #2a88fe 100%
   );
@@ -73,14 +73,14 @@ html {
   scroll-padding-top: 88px;
 }
 :focus-visible {
-  outline: 3px solid #0f766e;
+  outline: 3px solid var(--brand-mint);
   outline-offset: 4px;
 }
 .section-space {
   padding-block: clamp(3.5rem, 6vw, 5rem);
 }
 .eyebrow {
-  color: #0f766e;
+  color: var(--brand-mint);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -107,15 +107,16 @@ html {
   gap: 0.5rem;
   min-height: 44px;
   border-radius: 999px;
-  background: #0f766e;
-  color: white;
+  background: var(--brand-mint);
+  color: #0a0f1e;
   padding: 0.8rem 1.5rem;
   font-size: 0.875rem;
   font-weight: 600;
   transition: background-color 0.15s;
 }
 .button-primary:hover {
-  background: #115e59;
+  background: var(--brand-mint);
+  box-shadow: inset 0 0 0 2px #0a0f1e;
 }
 @media (prefers-reduced-motion: reduce) {
   *,

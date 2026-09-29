@@ -31,7 +31,7 @@ export default function OpengraphImage() {
             left: 0,
             right: 0,
             height: 14,
-            background: "linear-gradient(90deg, #2ECFB1, #1DAAE1, #2A88FE)",
+            background: "linear-gradient(90deg, #2DCFB1, #1DAAE1, #2A88FE)",
           }}
         />
 
@@ -46,7 +46,7 @@ export default function OpengraphImage() {
           }}
         >
           <span style={{ color: "#1DAAE1" }}>we.</span>
-          <span style={{ color: "#2ECFB1", fontStyle: "italic" }}>legal</span>
+          <span style={{ color: "#2DCFB1", fontStyle: "italic" }}>legal</span>
           <span style={{ color: "#FFFFFF", fontWeight: 300, marginLeft: 20 }}>
             suite
           </span>

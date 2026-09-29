@@ -27,7 +27,7 @@ export default function Logo({
         style={{ fontSize: heightPx * 0.6 }}
       >
         <span style={{ color: "#1DAAE1" }}>we.</span>
-        <span className="italic" style={{ color: "#2ECFB1" }}>
+        <span className="italic" style={{ color: "#2DCFB1" }}>
           legal
         </span>{" "}
         <span

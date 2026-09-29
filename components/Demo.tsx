@@ -45,7 +45,7 @@ function CalendlyEmbed() {
     observer.observe(container);
     return () => observer.disconnect();
   }, []);
-  const url = `${demo.calendly.url}?hide_gdpr_banner=1&primary_color=0f766e&background_color=ffffff&text_color=0a0f1e`;
+  const url = `${demo.calendly.url}?hide_gdpr_banner=1&primary_color=${demo.calendly.primaryColor}&background_color=ffffff&text_color=0a0f1e`;
   // onReady also runs when Next.js reuses the script after client navigation.
   const initializeCalendar = () => {
     const parentElement = widgetRef.current;
@@ -70,7 +70,7 @@ function CalendlyEmbed() {
             {!calendarReady && (
               <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-slate-50 px-6 text-center">
                 <Calendar
-                  className="h-8 w-8 text-teal-700"
+                  className="h-8 w-8 text-brand-mint"
                   aria-hidden="true"
                 />
                 <p className="font-display text-xl font-bold">
@@ -119,14 +119,14 @@ function CalendlyEmbed() {
           href={demo.calendly.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-semibold text-teal-800 underline underline-offset-4"
+          className="font-semibold text-brand-mint underline underline-offset-4"
         >
           Abrir en otra pestaña
         </a>{" "}
         o escribe a{" "}
         <a
           href={`mailto:${demo.calendly.fallbackEmail}`}
-          className="font-semibold text-teal-800 underline underline-offset-4"
+          className="font-semibold text-brand-mint underline underline-offset-4"
         >
           {demo.calendly.fallbackEmail}
         </a>
@@ -143,7 +143,7 @@ export default function Demo() {
       className="section-space bg-white"
       aria-labelledby="demo-title"
     >
-      <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-[.85fr_1.15fr] lg:gap-14">
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[.85fr_1.15fr] lg:gap-14">
         <div>
           <p className="eyebrow">{demo.eyebrow}</p>
           <h2 id="demo-title" className="section-title">
@@ -154,7 +154,7 @@ export default function Demo() {
             {demo.highlights.map((item) => (
               <li key={item.icon} className="flex items-start gap-3">
                 <Check
-                  className="mt-0.5 h-5 w-5 shrink-0 text-teal-700"
+                  className="mt-0.5 h-5 w-5 shrink-0 text-brand-mint"
                   aria-hidden="true"
                 />
                 <span className="text-sm leading-relaxed text-slate-600">
@@ -167,7 +167,7 @@ export default function Demo() {
             href={demo.calendly.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-teal-800"
+            className="mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brand-mint"
           >
             Agendar directamente en Calendly{" "}
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -175,7 +175,7 @@ export default function Demo() {
         </div>
         <div className="min-w-0">
           <div className="mb-5 flex items-center gap-3">
-            <Calendar className="h-5 w-5 text-teal-700" aria-hidden="true" />
+            <Calendar className="h-5 w-5 text-brand-mint" aria-hidden="true" />
             <p className="text-sm font-semibold">
               Demo personalizada · we.legal Suite
             </p>

@@ -36,7 +36,7 @@ export default function Pillars() {
                 transition={{ duration: 0.6, delay: index * 0.12, ease: "easeOut" }}
                 className="rounded-2xl border border-foreground/15 bg-foreground/[0.05] p-8 shadow-sm shadow-black/5"
               >
-                <Icon className="h-10 w-10" style={{ color: "#2ECFB1" }} strokeWidth={1.75} />
+                <Icon className="h-10 w-10" style={{ color: "#2DCFB1" }} strokeWidth={1.75} />
                 <h3 className="font-display mt-6 text-lg font-semibold text-foreground">{pillar.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-foreground/50">{pillar.copy}</p>
               </motion.div>
