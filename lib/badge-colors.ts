@@ -7,7 +7,7 @@ export const badgeBg: Record<BadgeColor, string> = {
 };
 
 export const badgeText: Record<BadgeColor, string> = {
-  red: "#f87171",
-  amber: "#fbbf24",
-  green: "#4ade80",
+  red: "#991b1b",
+  amber: "#92400e",
+  green: "#166534",
 };

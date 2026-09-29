@@ -1,92 +1,51 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { Check } from "lucide-react";
-import { profilesSection, profiles, type Profile } from "@/lib/content";
-
-function ProfileInfo({ profile }: { profile: Profile }) {
-  const nonEmpty = profile.copyLines.filter(Boolean);
-  const headingLines = nonEmpty.slice(0, 2);
-  const bodyLines = nonEmpty.slice(2);
-
-  return (
-    <div>
-      <p className="text-xs font-semibold uppercase tracking-widest text-brand-mint">
-        {profile.role}
-      </p>
-      <h3 className="font-display mt-2 text-2xl font-bold text-foreground">{profile.name}</h3>
-      <p className="mt-1 text-sm text-foreground/40">{profile.companyContext}</p>
-
-      <blockquote className="mt-6 border-l-2 border-brand-mint/60 pl-4 text-lg italic leading-relaxed text-foreground/70">
-        {profile.painPoints[0]}
-      </blockquote>
-
-      <div className="mt-6 space-y-1">
-        {headingLines.map((line) => (
-          <p key={line} className="text-lg font-semibold leading-snug text-foreground">
-            {line}
-          </p>
-        ))}
-      </div>
-
-      {bodyLines.map((line) => (
-        <p key={line} className="mt-3 text-sm leading-relaxed text-foreground/50">
-          {line}
-        </p>
-      ))}
-    </div>
-  );
-}
-
-function BenefitsCard({ profile }: { profile: Profile }) {
-  return (
-    <div className="rounded-2xl border border-foreground/20 bg-dark-card/60 p-8 shadow-sm shadow-black/5">
-      <p className="text-sm font-semibold text-foreground/70">Beneficios clave</p>
-      <ul className="mt-5 space-y-4">
-        {profile.benefits.map((benefit) => (
-          <li key={benefit} className="flex items-start gap-3">
-            <Check className="mt-0.5 h-5 w-5 shrink-0" style={{ color: "#2ECFB1" }} />
-            <span className="text-sm leading-relaxed text-foreground/70">{benefit}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+import { Check, Building2, BriefcaseBusiness } from "lucide-react";
+import { audiences } from "@/lib/marketing";
 
 export default function Profiles() {
   return (
-    <section className="bg-dark-bg py-24">
+    <section
+      id="para-quien"
+      className="section-space border-t border-slate-200/70 bg-dark-card"
+      aria-labelledby="audience-title"
+    >
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="font-display mx-auto max-w-2xl text-center text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
-          {profilesSection.headline}
+        <p className="eyebrow">Para tu equipo</p>
+        <h2 id="audience-title" className="section-title">
+          Una plataforma. Distintas formas de trabajar.
         </h2>
-
-        <div className="mt-16 flex flex-col gap-20">
-          {profiles.map((profile, index) => {
-            const reversed = index % 2 === 1;
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {audiences.map((item, index) => {
+            const Icon = index === 0 ? Building2 : BriefcaseBusiness;
             return (
-              <div key={profile.id} className="grid gap-10 md:grid-cols-2 md:items-center">
-                <motion.div
-                  initial={{ opacity: 0, x: reversed ? 24 : -24 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                  className={reversed ? "md:order-2" : "md:order-1"}
-                >
-                  <ProfileInfo profile={profile} />
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, x: reversed ? -24 : 24 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-                  className={reversed ? "md:order-1" : "md:order-2"}
-                >
-                  <BenefitsCard profile={profile} />
-                </motion.div>
-              </div>
+              <article
+                key={item.name}
+                className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8"
+              >
+                <Icon className="h-6 w-6 text-teal-700" aria-hidden="true" />
+                <p className="mt-5 text-sm font-semibold text-teal-800">
+                  {item.name}
+                </p>
+                <h3 className="font-display mt-2 text-2xl font-bold">
+                  {item.title}
+                </h3>
+                <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                  {item.description}
+                </p>
+                <ul className="mt-6 space-y-3">
+                  {item.benefits.map((benefit) => (
+                    <li
+                      key={benefit}
+                      className="flex items-start gap-3 text-sm text-slate-700"
+                    >
+                      <Check
+                        className="h-5 w-5 shrink-0 text-teal-700"
+                        aria-hidden="true"
+                      />
+                      {benefit}
+                    </li>
+                  ))}
+                </ul>
+              </article>
             );
           })}
         </div>

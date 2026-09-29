@@ -16,7 +16,12 @@
   --white: #ffffff;
   --black: #000000;
 
-  --gradient-brand: linear-gradient(135deg, #2ecfb1 0%, #1daae1 50%, #2a88fe 100%);
+  --gradient-brand: linear-gradient(
+    135deg,
+    #2ecfb1 0%,
+    #1daae1 50%,
+    #2a88fe 100%
+  );
 
   --background: var(--dark-bg);
   --foreground: #0a0f1e;
@@ -62,4 +67,86 @@ body {
      compensa para no desplazar el texto que sigue (el punto ".").  */
   padding-right: 0.15em;
   margin-right: -0.15em;
+}
+
+html {
+  scroll-padding-top: 88px;
+}
+:focus-visible {
+  outline: 3px solid #0f766e;
+  outline-offset: 4px;
+}
+.section-space {
+  padding-block: clamp(3.5rem, 6vw, 5rem);
+}
+.eyebrow {
+  color: #0f766e;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.section-title {
+  margin-top: 0.9rem;
+  font-family: var(--font-averta), sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+.section-copy {
+  margin-top: 1rem;
+  color: #475569;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+.button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  border-radius: 999px;
+  background: #0f766e;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background-color 0.15s;
+}
+.button-primary:hover {
+  background: #115e59;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.nav-demo {
+  padding-inline: 14px;
+  font-size: 12px;
+}
+@media (min-width: 640px) {
+  .nav-demo {
+    padding-inline: 22px;
+    font-size: 14px;
+  }
+}
+
+.nav-logo {
+  --logo-height: 22px;
+}
+@media (min-width: 640px) {
+  .nav-logo {
+    --logo-height: 32px;
+  }
+}
+.nav-demo {
+  white-space: nowrap;
 }

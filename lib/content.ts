@@ -29,17 +29,24 @@ export const nav = {
   links: [] as Link[],
   cta: { label: "Agenda tu demo →", href: "#demo" } satisfies Link,
   // Acceso a la aplicación (la suite). Externo.
-  suiteCta: { label: "Ir a la suite", href: "https://suite.welegal.mx" } satisfies Link,
+  suiteCta: {
+    label: "Ir a la suite",
+    href: "https://suite.welegal.mx",
+  } satisfies Link,
 };
 
 // --- HERO ----------------------------------------------------------------
 
 export const hero = {
-  headlineLines: ["La operación legal", "de tu empresa,", "toda en un solo lugar."],
+  headlineLines: [
+    "La operación legal",
+    "de tu empresa,",
+    "toda en un solo lugar.",
+  ],
   headlineHighlight: "un solo lugar",
   subtitle:
-    "El Legal Intelligence Engine que centraliza, entiende y gestiona toda la operación legal de tu empresa o despacho. Conoce tus documentos, procesos, equipos y riesgos para ayudarte a tomar mejores decisiones.",
-  ctaPrimary: { label: "Agenda tu demo gratis →", href: "#demo" } satisfies Link,
+    "Centraliza documentos, coordina contratos y da seguimiento a tu operación legal con IA. La información y los pendientes de tu equipo, conectados.",
+  ctaPrimary: { label: "Agendar demo", href: "#demo" } satisfies Link,
   ctaSecondary: { label: "Ver la plataforma", href: "#modulos" } satisfies Link,
 };
 
@@ -83,8 +90,9 @@ export const pillars: Pillar[] = [
 
 export const modulesSection = {
   eyebrow: "La plataforma",
-  headline: "Cinco módulos core. Una sola plataforma.",
-  subtitle: "Cada módulo habla con los demás. El Abogado AI los conoce a todos.",
+  headline: "Toda tu operación, conectada.",
+  subtitle:
+    "Cinco áreas para organizar documentos, personas y pendientes con el contexto de tu empresa.",
 };
 
 export const premiumSection = {
@@ -111,7 +119,8 @@ export const whatsappSection = {
     "Respuestas contextualizadas con la información de tu workspace",
     "Disponible siempre, sin instalar nada nuevo",
   ],
-  disclaimer: "El Abogado AI es una herramienta de acceso a información. No constituye asesoría legal.",
+  disclaimer:
+    "El Abogado AI es una herramienta de acceso a información. No constituye asesoría legal.",
   contactName: "We.legal Suite Assistant",
   conversation: [
     { role: "user", text: "¿Cuándo vence el arrendamiento de Polanco?" },
@@ -192,8 +201,12 @@ export const coreModules: CoreModule[] = [
     name: "Equipo / RRHH",
     phrase: "Toda la información laboral de tu equipo, accesible y completa.",
     description:
-      "Expediente digital completo de cada empleado — datos personales, laborales y de nómina. Portal del empleado con acceso a sus documentos y solicitudes. Importación masiva desde Excel.",
-    capabilities: [],
+      "Expedientes digitales, portal del empleado, documentos y solicitudes. Agrega Asistencia para registrar jornadas por WhatsApp y dar seguimiento a horarios e incidencias.",
+    capabilities: [
+      "Portal del empleado",
+      "Importación desde Excel",
+      "Asistencia: módulo adicional",
+    ],
     mockups: [
       {
         label: "García López, Mariana",
@@ -240,7 +253,8 @@ export const coreModules: CoreModule[] = [
   {
     id: "litigios",
     name: "Litigios",
-    phrase: "Todos tus procedimientos legales activos, con visibilidad ejecutiva.",
+    phrase:
+      "Todos tus procedimientos legales activos, con visibilidad ejecutiva.",
     description:
       "Gestión de procedimientos judiciales y extrajudiciales. Actos procesales, cuantía reclamada, provisión contable y evaluación de riesgo. Para que la dirección sepa en todo momento cuál es la exposición legal de la empresa.",
     capabilities: [],
@@ -303,7 +317,8 @@ export const premiumModules: PremiumModule[] = [
   {
     id: "reportes",
     name: "Reportes",
-    phrase: "Genera reportes ejecutivos de tu operación legal con un solo clic.",
+    phrase:
+      "Genera reportes ejecutivos de tu operación legal con un solo clic.",
     description:
       "Reportes generados con IA sobre el estado completo de la operación legal de la empresa. Para directores que necesitan visión ejecutiva sin revisar expediente por expediente.",
     capabilities: [
@@ -338,7 +353,8 @@ export const profiles: Profile[] = [
     id: "director-legal",
     role: "Director Legal / General Counsel",
     name: "Ana, Directora Legal",
-    companyContext: "100–500 empleados, industria manufactura o servicios profesionales",
+    companyContext:
+      "100–500 empleados, industria manufactura o servicios profesionales",
     painPoints: [
       "Su equipo pierde tiempo en tareas operativas (buscar documentos, actualizar expedientes, recordar vencimientos) en lugar de trabajo estratégico",
       "No tiene visibilidad del estado legal de la empresa en tiempo real sin revisar múltiples herramientas",
@@ -396,7 +412,8 @@ export interface ComparisonRow {
 export const comparison = {
   eyebrow: "Comparativa",
   headline: "we.legal hace lo que las demás herramientas no pueden solas.",
-  subtitle: "Porque el problema no es un módulo. Es que todo tiene que funcionar junto.",
+  subtitle:
+    "Porque el problema no es un módulo. Es que todo tiene que funcionar junto.",
   columns: [
     "Soluciones de contratos",
     "Solo firma electrónica",
@@ -404,16 +421,46 @@ export const comparison = {
     "we.legal suite",
   ],
   rows: [
-    { capability: "Contratos con análisis IA", values: ["partial", "none", "none", "full"] },
-    { capability: "OCR + extracción de documentos", values: ["none", "none", "none", "full"] },
-    { capability: "RRHH legal integrado", values: ["none", "none", "partial", "full"] },
-    { capability: "Litigios con visibilidad ejecutiva", values: ["none", "none", "none", "full"] },
-    { capability: "Documentos corporativos", values: ["none", "none", "partial", "full"] },
-    { capability: "Firma NOM-151 incluida", values: ["none", "full", "none", "full"] },
-    { capability: "Alertas automáticas configurables", values: ["partial", "none", "none", "full"] },
-    { capability: "Hecho para el marco legal mexicano", values: ["partial", "partial", "none", "full"] },
-    { capability: "Plataforma multitenant", values: ["none", "none", "none", "full"] },
-    { capability: "Todo integrado en un solo lugar", values: ["none", "none", "none", "full"] },
+    {
+      capability: "Contratos con análisis IA",
+      values: ["partial", "none", "none", "full"],
+    },
+    {
+      capability: "OCR + extracción de documentos",
+      values: ["none", "none", "none", "full"],
+    },
+    {
+      capability: "RRHH legal integrado",
+      values: ["none", "none", "partial", "full"],
+    },
+    {
+      capability: "Litigios con visibilidad ejecutiva",
+      values: ["none", "none", "none", "full"],
+    },
+    {
+      capability: "Documentos corporativos",
+      values: ["none", "none", "partial", "full"],
+    },
+    {
+      capability: "Firma NOM-151 incluida",
+      values: ["none", "full", "none", "full"],
+    },
+    {
+      capability: "Alertas automáticas configurables",
+      values: ["partial", "none", "none", "full"],
+    },
+    {
+      capability: "Hecho para el marco legal mexicano",
+      values: ["partial", "partial", "none", "full"],
+    },
+    {
+      capability: "Plataforma multitenant",
+      values: ["none", "none", "none", "full"],
+    },
+    {
+      capability: "Todo integrado en un solo lugar",
+      values: ["none", "none", "none", "full"],
+    },
   ] as ComparisonRow[],
   legend: {
     full: "✓ Completo",
@@ -431,17 +478,18 @@ export interface DemoHighlight {
 
 export const demo = {
   eyebrow: "Agenda tu demo",
-  headline: "30 minutos que cambian cómo opera tu empresa legalmente.",
-  headlineHighlight: "legalmente.",
-  subtitle: "Te mostramos la plataforma con datos reales. Sin presentaciones genéricas. Sin compromiso.",
+  headline: "Conoce cómo se conecta tu operación legal.",
+  headlineHighlight: "operación legal",
+  subtitle:
+    "Una demo personalizada con ejemplos de tu operación. Sin compromiso.",
   highlights: [
     {
       icon: "contracts",
-      text: "Tu flujo de contratos completo — desde la creación hasta la firma electrónica NOM-151, con análisis IA en tiempo real",
+      text: "Flow y Norma: solicitudes, revisión contra políticas, aprobaciones y seguimiento hasta la firma",
     },
     {
       icon: "ai",
-      text: "El Abogado AI en acción — consultas sobre contratos, empleados y trámites. También vía WhatsApp",
+      text: "Abogado IA, WhatsApp y Word: información y revisión donde ya trabaja tu equipo",
     },
     {
       icon: "corporate",
@@ -449,7 +497,7 @@ export const demo = {
     },
     {
       icon: "reports",
-      text: "Dashboard ejecutivo y reportes — el estado legal de tu empresa de un vistazo, generado con IA",
+      text: "DocRoom y reportes: revisión de documentos en conjunto e información para decidir",
     },
   ] as DemoHighlight[],
   guarantees: [
@@ -514,5 +562,8 @@ export const footer = {
   ] as FooterColumn[],
   credit: "© 2026 we.legal Suite · 🇲🇽 Hecho en México · welegal.mx",
   // Link discreto de acceso al registro de marca (externo).
-  registro: { label: "Ir a registro de marca", href: "https://welegal.mx/auth/login" },
+  registro: {
+    label: "Ir a registro de marca",
+    href: "https://welegal.mx/auth/login",
+  },
 };

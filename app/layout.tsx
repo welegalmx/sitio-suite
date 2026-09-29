@@ -31,7 +31,7 @@ const dmSans = localFont({
 export const metadata: Metadata = {
   title: "we.legal Suite — La operación legal de tu empresa, en un solo lugar",
   description:
-    "Contratos, documentos corporativos, equipo, litigios y un Abogado AI que conoce tu empresa por dentro. Plataforma legal SaaS hecha en México para Latinoamérica.",
+    "Gestiona tu operación legal con IA. Contratos, Flow, Norma, DocRoom y conexión con Word y WhatsApp. Una suite para empresas y despachos en México.",
   metadataBase: new URL(SITE_URL),
   applicationName: "we.legal Suite",
   keywords: [
@@ -150,6 +150,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <a href="#contenido" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-5 focus:py-3">Saltar al contenido</a>
         {children}
       </body>
     </html>

@@ -22,12 +22,17 @@ export default function Logo({
 
   if (errored) {
     return (
-      <span className="font-display font-extrabold tracking-tight" style={{ fontSize: heightPx * 0.6 }}>
+      <span
+        className="font-display font-extrabold tracking-tight"
+        style={{ fontSize: heightPx * 0.6 }}
+      >
         <span style={{ color: "#1DAAE1" }}>we.</span>
         <span className="italic" style={{ color: "#2ECFB1" }}>
           legal
         </span>{" "}
-        <span className={`font-light ${dark ? "text-white/60" : "text-foreground/60"}`}>
+        <span
+          className={`font-light ${dark ? "text-white/60" : "text-foreground/60"}`}
+        >
           suite
         </span>
       </span>
@@ -41,7 +46,7 @@ export default function Logo({
       width={Math.round(heightPx * LOGO_ASPECT_RATIO)}
       height={heightPx}
       priority={priority}
-      style={{ height: heightPx, width: "auto" }}
+      style={{ height: `var(--logo-height, ${heightPx}px)`, width: "auto" }}
       onError={() => setErrored(true)}
     />
   );
