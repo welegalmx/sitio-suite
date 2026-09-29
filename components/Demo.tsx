@@ -2,126 +2,186 @@
 
 import { useEffect, useRef, useState } from "react";
 import Script from "next/script";
-import { motion } from "framer-motion";
-import {
-  Check,
-  Calendar,
-  FileSignature,
-  Sparkles,
-  Building2,
-  BarChart3,
-  type LucideIcon,
-} from "lucide-react";
-import { demo, type DemoHighlight } from "@/lib/content";
-import { renderHighlighted } from "@/lib/highlight-text";
-
-const FALLBACK_TIMEOUT_MS = 4000;
-
-// Mapea cada highlight de la demo a su ícono de lucide.
-const HIGHLIGHT_ICONS: Record<DemoHighlight["icon"], LucideIcon> = {
-  contracts: FileSignature,
-  ai: Sparkles,
-  corporate: Building2,
-  reports: BarChart3,
-};
+import { ArrowUpRight, Calendar, Check } from "lucide-react";
+import { demo } from "@/lib/content";
 
 function CalendlyEmbed() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [showFallback, setShowFallback] = useState(false);
-
+  const widgetRef = useRef<HTMLDivElement>(null);
+  const [loadCalendar, setLoadCalendar] = useState(false);
+  const [calendarReady, setCalendarReady] = useState(false);
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const hasIframe = containerRef.current?.querySelector("iframe");
-      if (!hasIframe) setShowFallback(true);
-    }, FALLBACK_TIMEOUT_MS);
-    return () => clearTimeout(timer);
+    const receive = (event: MessageEvent) => {
+      const frame = widgetRef.current?.querySelector("iframe");
+      if (
+        event.origin !== "https://calendly.com" ||
+        !frame ||
+        event.source !== frame.contentWindow
+      )
+        return;
+      if (
+        [
+          "calendly.event_type_viewed",
+          "calendly.date_and_time_selected",
+        ].includes(event.data?.event)
+      )
+        setCalendarReady(true);
+    };
+    window.addEventListener("message", receive);
+    return () => window.removeEventListener("message", receive);
   }, []);
-
-  if (showFallback) {
-    return (
-      <div className="flex h-[560px] flex-col items-center justify-center gap-4 rounded-xl border border-foreground/20 bg-foreground/[0.05] px-8 text-center">
-        <p className="text-sm text-foreground/60">
-          No pudimos cargar el calendario. Escríbenos y agendamos tu demo por correo.
-        </p>
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setLoadCalendar(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" },
+    );
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+  const url = `${demo.calendly.url}?hide_gdpr_banner=1&primary_color=0f766e&background_color=ffffff&text_color=0a0f1e`;
+  // onReady also runs when Next.js reuses the script after client navigation.
+  const initializeCalendar = () => {
+    const parentElement = widgetRef.current;
+    if (!parentElement || parentElement.querySelector("iframe")) return;
+    const calendly = (
+      window as Window & {
+        Calendly?: {
+          initInlineWidget: (options: {
+            url: string;
+            parentElement: HTMLElement;
+          }) => void;
+        };
+      }
+    ).Calendly;
+    calendly?.initInlineWidget({ url, parentElement });
+  };
+  return (
+    <div ref={containerRef}>
+      <div className="relative h-[650px] overflow-hidden rounded-xl border border-slate-200 bg-white">
+        {loadCalendar ? (
+          <>
+            {!calendarReady && (
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-slate-50 px-6 text-center">
+                <Calendar
+                  className="h-8 w-8 text-teal-700"
+                  aria-hidden="true"
+                />
+                <p className="font-display text-xl font-bold">
+                  Elige el horario que mejor te funcione.
+                </p>
+                <p className="max-w-xs text-sm leading-relaxed text-slate-600">
+                  Puedes abrir la agenda directamente mientras se carga el
+                  calendario.
+                </p>
+                <a
+                  href={demo.calendly.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button-primary"
+                >
+                  Elegir fecha y hora
+                </a>
+              </div>
+            )}
+            <div
+              ref={widgetRef}
+              className="calendly-inline-widget h-full w-full"
+              data-auto-load="false"
+            />
+            <Script
+              src="https://assets.calendly.com/assets/external/widget.js"
+              strategy="afterInteractive"
+              onReady={initializeCalendar}
+            />
+          </>
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            <button
+              type="button"
+              className="button-primary"
+              onClick={() => setLoadCalendar(true)}
+            >
+              Ver horarios disponibles
+            </button>
+          </div>
+        )}
+      </div>
+      <p className="mt-4 text-sm leading-relaxed text-slate-600">
+        ¿No aparece el calendario?{" "}
+        <a
+          href={demo.calendly.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-teal-800 underline underline-offset-4"
+        >
+          Abrir en otra pestaña
+        </a>{" "}
+        o escribe a{" "}
         <a
           href={`mailto:${demo.calendly.fallbackEmail}`}
-          className="rounded-full px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-          style={{ background: "var(--gradient-brand)" }}
+          className="font-semibold text-teal-800 underline underline-offset-4"
         >
           {demo.calendly.fallbackEmail}
         </a>
-      </div>
-    );
-  }
-
-  return (
-    <div ref={containerRef}>
-      <div
-        className="calendly-inline-widget"
-        data-url={`${demo.calendly.url}?hide_gdpr_banner=1&primary_color=${demo.calendly.primaryColor}&background_color=${demo.calendly.backgroundColor}&text_color=${demo.calendly.textColor}`}
-        style={{ minWidth: "280px", height: "560px" }}
-      />
-      <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="lazyOnload" />
+        .
+      </p>
     </div>
   );
 }
 
 export default function Demo() {
   return (
-    <section id="demo" className="bg-[#F0F7FF] py-24">
-      <div className="mx-auto grid max-w-6xl gap-16 px-6 md:grid-cols-2 md:items-start">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-mint">
-            {demo.eyebrow}
-          </p>
-          <h2 className="font-display mt-4 text-3xl font-extrabold leading-tight tracking-tight text-foreground md:text-4xl">
-            {renderHighlighted(demo.headline, demo.headlineHighlight)}
+    <section
+      id="demo"
+      className="section-space bg-white"
+      aria-labelledby="demo-title"
+    >
+      <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-[.85fr_1.15fr] lg:gap-14">
+        <div>
+          <p className="eyebrow">{demo.eyebrow}</p>
+          <h2 id="demo-title" className="section-title">
+            {demo.headline}
           </h2>
-          <p className="mt-4 text-base text-foreground/50">{demo.subtitle}</p>
-
-          <div className="mt-10 space-y-5">
-            {demo.highlights.map((item) => {
-              const Icon = HIGHLIGHT_ICONS[item.icon];
-              return (
-                <div key={item.text} className="flex items-start gap-4">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-mint/12 text-brand-mint">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <p className="text-sm leading-relaxed text-foreground/70">{item.text}</p>
-                </div>
-              );
-            })}
-          </div>
-
-          <ul className="mt-10 space-y-3 border-t border-foreground/20 pt-8">
-            {demo.guarantees.map((guarantee) => (
-              <li key={guarantee} className="flex items-start gap-3">
-                <Check className="mt-0.5 h-5 w-5 shrink-0" style={{ color: "#2ECFB1" }} />
-                <span className="text-sm text-foreground/60">{guarantee}</span>
+          <p className="section-copy">{demo.subtitle}</p>
+          <ul className="mt-8 space-y-5">
+            {demo.highlights.map((item) => (
+              <li key={item.icon} className="flex items-start gap-3">
+                <Check
+                  className="mt-0.5 h-5 w-5 shrink-0 text-teal-700"
+                  aria-hidden="true"
+                />
+                <span className="text-sm leading-relaxed text-slate-600">
+                  {item.text}
+                </span>
               </li>
             ))}
           </ul>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
-          className="rounded-2xl border border-brand-mint/40 bg-dark-card p-6 shadow-sm shadow-black/5"
-        >
-          <div className="mb-6 flex items-center gap-3">
-            <Calendar className="h-5 w-5" style={{ color: "#2ECFB1" }} />
-            <p className="text-sm font-semibold text-foreground">Demo we.legal Suite · 30 minutos</p>
+          <a
+            href={demo.calendly.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-teal-800"
+          >
+            Agendar directamente en Calendly{" "}
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+        </div>
+        <div className="min-w-0">
+          <div className="mb-5 flex items-center gap-3">
+            <Calendar className="h-5 w-5 text-teal-700" aria-hidden="true" />
+            <p className="text-sm font-semibold">
+              Demo personalizada · we.legal Suite
+            </p>
           </div>
-
           <CalendlyEmbed />
-        </motion.div>
+        </div>
       </div>
     </section>
   );

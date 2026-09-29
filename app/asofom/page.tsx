@@ -37,7 +37,7 @@ export default function AsofomPage() {
     <>
       <Nav />
 
-      <main className="flex-1">
+      <main id="contenido" className="flex-1">
         {/* HERO + FORMULARIO */}
         <section className="relative overflow-hidden bg-dark-bg pt-[68px]">
           {/* Fondo degradado sutil de marca */}
