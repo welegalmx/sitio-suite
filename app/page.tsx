@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col">
-      <Nav />
+      <Nav overlayHero />
       <main id="contenido">
         <Hero />
         <ModuleExplorer />

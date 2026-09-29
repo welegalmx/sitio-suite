@@ -5,7 +5,7 @@ import Logo from "./Logo";
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-[#0A0F1E]">
-      <div className="mx-auto max-w-6xl px-6 py-10">
+      <div className="mx-auto max-w-7xl px-6 py-10">
         <div className="flex flex-col items-center text-center">
           <Link href="/" className="flex items-center">
             <Logo heightPx={28} dark />

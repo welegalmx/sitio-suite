@@ -508,7 +508,7 @@ export const demo = {
   ],
   calendly: {
     url: "https://calendly.com/welegal-info/demo-we-legal-suite",
-    primaryColor: "2ECFB1",
+    primaryColor: "2DCFB1",
     backgroundColor: "f4f8ff",
     textColor: "0a0f1e",
     fallbackEmail: "demo@welegal.mx",

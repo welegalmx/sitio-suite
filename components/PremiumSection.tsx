@@ -16,49 +16,46 @@ export default function PremiumSection() {
   return (
     <section
       id="capacidades"
-      className="section-space border-y border-slate-200/70 bg-dark-card"
+      className="section-space bg-slate-50/60"
       aria-labelledby="capabilities-title"
     >
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-7xl px-6">
         <p className="eyebrow">{capabilities.eyebrow}</p>
         <h2 id="capabilities-title" className="section-title">
           {capabilities.headline}
         </h2>
         <p className="section-copy max-w-2xl">{capabilities.subtitle}</p>
-        <div className="mt-10 grid gap-5 lg:grid-cols-3">
+        <div className="mt-12 grid gap-10 lg:grid-cols-3 lg:gap-0">
           {capabilities.items.map((item, index) => {
             const Icon = icons[index];
             return (
               <article
                 id={item.id}
                 key={item.id}
-                className="flex min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-6 md:p-7"
+                className="flex min-w-0 flex-col border-t border-slate-200 pt-8 lg:border-t-0 lg:border-l lg:px-8 lg:pt-0 lg:first:border-l-0 lg:first:pl-0 lg:last:pr-0"
               >
-                <div className="flex items-center justify-between">
-                  <Icon className="h-6 w-6 text-teal-700" aria-hidden="true" />
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
-                    Módulo adicional
-                  </span>
+                <div className="flex items-center gap-3">
+                  <Icon className="h-6 w-6 text-brand-mint" aria-hidden="true" />
+                  <p className="text-sm font-semibold text-brand-mint">
+                    {item.name}
+                  </p>
                 </div>
-                <p className="mt-6 text-sm font-semibold text-teal-800">
-                  {item.name}
-                </p>
-                <h3 className="font-display mt-2 text-2xl font-bold leading-tight">
+                <h3 className="font-display mt-3 text-2xl font-bold leading-tight">
                   {item.title}
                 </h3>
                 <p className="mt-4 text-sm leading-relaxed text-slate-600">
                   {item.description}
                 </p>
-                <div className="mt-6 flex-1">
+                <div className="mt-8 flex-1">
                   <p className="mb-3 text-[11px] font-medium uppercase tracking-wider text-slate-500">
                     Ejemplo ilustrativo
                   </p>
                   {item.steps && (
-                    <ol className="space-y-2">
+                    <ol className="space-y-1">
                       {item.steps.map((step, i) => (
                         <li
                           key={step}
-                          className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm ${i === 2 ? "border border-teal-200 bg-teal-50 font-semibold text-teal-900" : "bg-slate-50 text-slate-600"}`}
+                          className={`flex items-center gap-3 border-l-2 px-3 py-2 text-sm ${i === 2 ? "border-brand-mint bg-brand-mint/10 font-semibold text-foreground" : "border-slate-200 text-slate-600"}`}
                         >
                           <span className="text-xs tabular-nums">0{i + 1}</span>
                           {step}
@@ -70,7 +67,7 @@ export default function PremiumSection() {
                     </ol>
                   )}
                   {item.example && (
-                    <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+                    <div className="border-l-2 border-amber-300 pl-4 py-1">
                       <p className="text-xs font-semibold text-amber-900">
                         {item.example.status}
                       </p>
@@ -80,18 +77,18 @@ export default function PremiumSection() {
                       <p className="mt-2 text-sm text-slate-700">
                         {item.example.actual}
                       </p>
-                      <p className="mt-3 border-t border-amber-200 pt-3 text-sm text-slate-600">
+                      <p className="mt-3 border-t border-slate-200 pt-3 text-sm text-slate-600">
                         {item.example.expected}
                       </p>
                     </div>
                   )}
                   {item.rows && (
-                    <div className="overflow-x-auto rounded-xl border border-slate-200">
+                    <div className="overflow-x-auto">
                       <table className="w-full text-left text-xs">
                         <caption className="sr-only">
                           Comparación ilustrativa de contratos en DocRoom
                         </caption>
-                        <thead className="bg-slate-100 text-slate-600">
+                        <thead className="text-slate-500">
                           <tr>
                             {item.columns.map((col) => (
                               <th
@@ -108,7 +105,7 @@ export default function PremiumSection() {
                           {item.rows.map((row) => (
                             <tr
                               key={row[0]}
-                              className="border-t border-slate-100"
+                              className="border-t border-slate-200/70"
                             >
                               {row.map((cell, i) =>
                                 i === 0 ? (
@@ -135,7 +132,7 @@ export default function PremiumSection() {
                     </div>
                   )}
                 </div>
-                <p className="mt-6 border-t border-slate-100 pt-4 text-xs leading-relaxed text-slate-600">
+                <p className="mt-6 border-t border-slate-200/70 pt-4 text-xs leading-relaxed text-slate-600">
                   {item.detail}
                 </p>
               </article>
@@ -144,7 +141,7 @@ export default function PremiumSection() {
         </div>
         <a
           href="#demo"
-          className="mt-7 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-teal-800"
+          className="mt-9 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-foreground underline decoration-brand-mint decoration-2 underline-offset-8 hover:decoration-foreground"
         >
           Conocer los módulos en una demo{" "}
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -161,8 +158,10 @@ export default function PremiumSection() {
               const Icon = toolIcons[index];
               return (
                 <div key={item.name}>
-                  <Icon className="h-5 w-5 text-teal-700" aria-hidden="true" />
-                  <h4 className="mt-3 text-base font-semibold">{item.name}</h4>
+                  <div className="flex items-center gap-3 text-brand-mint">
+                    <Icon className="h-5 w-5 shrink-0" aria-hidden="true" />
+                    <h4 className="text-base font-semibold">{item.name}</h4>
+                  </div>
                   <p className="mt-2 text-sm leading-relaxed text-slate-600">
                     {item.description}
                   </p>

@@ -5,40 +5,42 @@ export default function Profiles() {
   return (
     <section
       id="para-quien"
-      className="section-space border-t border-slate-200/70 bg-dark-card"
+      className="section-space bg-slate-50/60"
       aria-labelledby="audience-title"
     >
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-7xl px-6">
         <p className="eyebrow">Para tu equipo</p>
         <h2 id="audience-title" className="section-title">
           Una plataforma. Distintas formas de trabajar.
         </h2>
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <div className="mt-12 divide-y divide-slate-200">
           {audiences.map((item, index) => {
             const Icon = index === 0 ? Building2 : BriefcaseBusiness;
             return (
               <article
                 key={item.name}
-                className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8"
+                className="grid gap-6 py-9 first:pt-0 last:pb-0 lg:grid-cols-12 lg:gap-8"
               >
-                <Icon className="h-6 w-6 text-teal-700" aria-hidden="true" />
-                <p className="mt-5 text-sm font-semibold text-teal-800">
-                  {item.name}
-                </p>
-                <h3 className="font-display mt-2 text-2xl font-bold">
+                <div className="flex items-center gap-3 self-start text-brand-mint lg:col-span-2">
+                  <Icon className="h-6 w-6 shrink-0" aria-hidden="true" />
+                  <p className="text-sm font-semibold">{item.name}</p>
+                </div>
+                <div className="lg:col-span-5">
+                <h3 className="font-display max-w-sm text-2xl font-bold leading-tight">
                   {item.title}
                 </h3>
                 <p className="mt-4 text-sm leading-relaxed text-slate-600">
                   {item.description}
                 </p>
-                <ul className="mt-6 space-y-3">
+                </div>
+                <ul className="space-y-4 lg:col-span-5 lg:pl-6">
                   {item.benefits.map((benefit) => (
                     <li
                       key={benefit}
-                      className="flex items-start gap-3 text-sm text-slate-700"
+                      className="flex items-start gap-3 text-sm leading-relaxed text-slate-700"
                     >
                       <Check
-                        className="h-5 w-5 shrink-0 text-teal-700"
+                        className="h-5 w-5 shrink-0 text-brand-mint"
                         aria-hidden="true"
                       />
                       {benefit}

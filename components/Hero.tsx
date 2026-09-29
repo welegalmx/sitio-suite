@@ -71,7 +71,7 @@ export default function Hero() {
       />
       <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(6,11,24,0.94),rgba(6,11,24,0.76)_55%,rgba(6,11,24,0.38))]" />
       <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-28">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-200">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-mint">
           Operación legal · Inteligencia artificial
         </p>
         <h1 className="font-display mt-6 max-w-3xl text-4xl font-extrabold leading-[1.08] tracking-tight text-white md:text-6xl">

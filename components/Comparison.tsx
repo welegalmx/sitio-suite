@@ -12,7 +12,7 @@ const coverageIcon: Record<Coverage, LucideIcon> = {
 };
 
 const coverageColor: Record<Coverage, string> = {
-  full: "#2ECFB1",
+  full: "#2DCFB1",
   partial: "#fbbf24",
   none: "#f87171",
 };
