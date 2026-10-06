@@ -78,20 +78,31 @@ async function getAccessToken(nowSeconds: number): Promise<string> {
   return data.access_token;
 }
 
+/** Hoja y pestaña destino de un append. */
+export interface SheetTarget {
+  spreadsheetId?: string;
+  tab?: string;
+}
+
 /**
  * Agrega una fila al final de la pestaña indicada de una hoja de cálculo.
  * Los valores se escriben tal cual (valueInputOption RAW).
  *
  * @param values  Celdas de la fila, en orden de columna (A, B, C, ...).
+ * @param target  Hoja/pestaña destino. Sin él se usa la de ASOFOM
+ *                (ASOFOM_SHEET_ID / ASOFOM_SHEET_TAB).
  */
-export async function appendSheetRow(values: (string | number)[]): Promise<void> {
-  const spreadsheetId = process.env.ASOFOM_SHEET_ID;
+export async function appendSheetRow(
+  values: (string | number)[],
+  target: SheetTarget = {},
+): Promise<void> {
+  const spreadsheetId = target.spreadsheetId || process.env.ASOFOM_SHEET_ID;
   if (!spreadsheetId) {
-    throw new Error("Falta ASOFOM_SHEET_ID en el entorno.");
+    throw new Error("Falta el ID de la hoja de cálculo destino en el entorno.");
   }
   // Pestaña destino; por defecto "Registros". El rango A1 hace que la API
   // localice la tabla existente y agregue después de la última fila.
-  const tab = process.env.ASOFOM_SHEET_TAB || "Registros";
+  const tab = target.tab || process.env.ASOFOM_SHEET_TAB || "Registros";
 
   const nowSeconds = Math.floor(Date.now() / 1000);
   const accessToken = await getAccessToken(nowSeconds);
