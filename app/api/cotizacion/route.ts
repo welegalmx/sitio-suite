@@ -1,5 +1,5 @@
 import { appendSheetRow } from "@/lib/google-sheets";
-import { MODULOS, VOLUMEN_MAX, VOLUMENES } from "@/lib/cotizacion";
+import { MODULOS, ORDEN_HOJA, VOLUMEN_MAX, VOLUMENES } from "@/lib/cotizacion";
 
 // node:crypto (firma del JWT de la service account) solo existe en el
 // runtime Node, no en Edge.
@@ -68,7 +68,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const volumenes: number[] = [];
+  const volumenes: Record<string, number> = {};
   for (const campo of VOLUMENES) {
     const n = cantidad(body[campo.name]);
     if (n === null) {
@@ -77,7 +77,7 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
-    volumenes.push(n);
+    volumenes[campo.name] = n;
   }
 
   const modulos: string[] = [];
@@ -110,7 +110,15 @@ export async function POST(request: Request) {
 
   try {
     await appendSheetRow(
-      [fecha, nombre, correo, whatsapp, empresa, ...volumenes, ...modulos],
+      [
+        fecha,
+        empresa,
+        nombre,
+        correo,
+        whatsapp,
+        ...ORDEN_HOJA.map((c) => volumenes[c.name]),
+        ...modulos,
+      ],
       { spreadsheetId, tab: process.env.COTIZACION_SHEET_TAB || "Cotizaciones" },
     );
   } catch (err) {
