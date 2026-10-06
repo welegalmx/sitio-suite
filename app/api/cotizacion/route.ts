@@ -97,14 +97,21 @@ export async function POST(request: Request) {
     timeZone: "America/Mexico_City",
   });
 
+  // Hoja propia de cotizaciones. Sin respaldo a la de ASOFOM: si falta la
+  // variable, preferimos fallar a escribir en la hoja equivocada.
+  const spreadsheetId = process.env.COTIZACION_SHEET_ID;
+  if (!spreadsheetId) {
+    console.error("[cotizacion] falta COTIZACION_SHEET_ID en el entorno.");
+    return Response.json(
+      { error: "No pudimos guardar tu solicitud. Intenta de nuevo." },
+      { status: 500 },
+    );
+  }
+
   try {
     await appendSheetRow(
       [fecha, nombre, correo, whatsapp, empresa, ...volumenes, ...modulos],
-      {
-        // Por defecto, una pestaña "Cotizaciones" en la misma hoja de ASOFOM.
-        spreadsheetId: process.env.COTIZACION_SHEET_ID || process.env.ASOFOM_SHEET_ID,
-        tab: process.env.COTIZACION_SHEET_TAB || "Cotizaciones",
-      },
+      { spreadsheetId, tab: process.env.COTIZACION_SHEET_TAB || "Cotizaciones" },
     );
   } catch (err) {
     console.error("[cotizacion] no se pudo guardar la solicitud:", err);
