@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
+import Logo from "@/components/Logo";
 import CotizacionForm from "@/components/CotizacionForm";
 
 export const metadata: Metadata = {
@@ -15,11 +14,11 @@ export const metadata: Metadata = {
 
 export default function CotizacionPage() {
   return (
+    // Sin menú ni footer: es una vista para el prospecto, no una página
+    // del sitio. Solo el logo como firma de marca.
     <>
-      <Nav />
-
       <main id="contenido" className="flex-1">
-        <section className="relative overflow-hidden pt-[72px]">
+        <section className="relative overflow-hidden">
           {/* Halo de marca muy tenue detrás del encabezado */}
           <div
             aria-hidden
@@ -27,7 +26,11 @@ export default function CotizacionPage() {
             style={{ background: "var(--gradient-brand)" }}
           />
 
-          <div className="relative mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 sm:pt-24">
+          <div className="relative mx-auto max-w-2xl px-4 pb-24 pt-10 sm:px-6 sm:pt-14">
+            <div className="mb-14 sm:mb-20">
+              <Logo heightPx={26} priority />
+            </div>
+
             <header className="mb-14">
               <p className="eyebrow">Solicitud de cotización</p>
               <h1 className="mt-4 font-display text-4xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl">
@@ -44,8 +47,6 @@ export default function CotizacionPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </>
   );
 }

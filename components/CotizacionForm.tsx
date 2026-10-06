@@ -204,7 +204,7 @@ export default function CotizacionForm() {
 
       <Seccion
         numero="03"
-        titulo="Módulos adicionales"
+        titulo="Módulos especiales"
         copy="Indica cuáles quieres que incluyamos en la propuesta."
       >
         <div className="space-y-3">
@@ -229,6 +229,7 @@ export default function CotizacionForm() {
                       name={m.name}
                       value={op}
                       required
+                      defaultChecked={op === "si"}
                       className="peer absolute inset-0 cursor-pointer opacity-0"
                     />
                     <span className="block min-w-14 rounded-full px-4 py-1.5 text-center text-sm font-medium text-slate-500 transition-colors peer-checked:bg-foreground peer-checked:text-white peer-checked:shadow-sm peer-focus-visible:ring-2 peer-focus-visible:ring-brand-mint">

@@ -27,7 +27,7 @@ export interface ModuloCampo {
   descripcion: string;
 }
 
-// Módulos adicionales: respuesta Sí / No obligatoria.
+// Módulos especiales: respuesta Sí / No obligatoria (marcados en Sí por defecto).
 export const MODULOS: ModuloCampo[] = [
   { name: "flow", label: "Flow", descripcion: "Ciclo de vida del contrato" },
   { name: "docroom", label: "DocRoom", descripcion: "Comparación en rejilla" },
