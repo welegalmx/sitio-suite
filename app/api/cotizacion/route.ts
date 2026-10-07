@@ -1,5 +1,13 @@
 import { appendSheetRow } from "@/lib/google-sheets";
-import { MODULOS, ORDEN_HOJA, VOLUMEN_MAX, VOLUMENES } from "@/lib/cotizacion";
+import {
+  CUENTAS,
+  INDUSTRIAS,
+  MODULOS,
+  ORDEN_HOJA,
+  TAMANOS,
+  VOLUMEN_MAX,
+  VOLUMENES,
+} from "@/lib/cotizacion";
 
 // node:crypto (firma del JWT de la service account) solo existe en el
 // runtime Node, no en Edge.
@@ -68,6 +76,37 @@ export async function POST(request: Request) {
     );
   }
 
+  const tamano = clean(body.tamano, 40);
+  if (!TAMANOS.some((t) => t.value === tamano)) {
+    return Response.json(
+      { error: "Selecciona el tamaño de tu empresa." },
+      { status: 400 },
+    );
+  }
+  const industria = clean(body.industria, 80);
+  if (!INDUSTRIAS.includes(industria)) {
+    return Response.json(
+      { error: "Selecciona la industria de tu empresa." },
+      { status: 400 },
+    );
+  }
+
+  // Opcional: quién nos refirió (persona o empresa).
+  const referido = clean(body.referido, 120);
+
+  // Workspaces y usuarios: obligatorios y al menos 1.
+  const cuentas: number[] = [];
+  for (const campo of CUENTAS) {
+    const n = cantidad(body[campo.name]);
+    if (n === null || n < 1) {
+      return Response.json(
+        { error: `Indica cuántos ${campo.label.toLowerCase()} necesitas (al menos 1).` },
+        { status: 400 },
+      );
+    }
+    cuentas.push(n);
+  }
+
   const volumenes: Record<string, number> = {};
   for (const campo of VOLUMENES) {
     const n = cantidad(body[campo.name]);
@@ -116,6 +155,10 @@ export async function POST(request: Request) {
         nombre,
         correo,
         whatsapp,
+        tamano,
+        industria,
+        referido,
+        ...cuentas,
         ...ORDEN_HOJA.map((c) => volumenes[c.name]),
         ...modulos,
       ],
