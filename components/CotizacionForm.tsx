@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, Check, Loader2 } from "lucide-react";
-import { MODULOS, VOLUMENES } from "@/lib/cotizacion";
+import { ArrowRight, Check, ChevronDown, Loader2 } from "lucide-react";
+import { CUENTAS, INDUSTRIAS, MODULOS, TAMANOS, VOLUMENES } from "@/lib/cotizacion";
 
 type Estado = "idle" | "enviando" | "ok" | "error";
 
@@ -167,8 +167,88 @@ export default function CotizacionForm() {
         </div>
       </Seccion>
 
+      <Seccion numero="02" titulo="Tu empresa">
+        <div className="space-y-7">
+          <div role="radiogroup" aria-labelledby="tamano-label">
+            <span id="tamano-label" className={labelBase}>
+              Tamaño <span className="font-normal text-slate-400">· número de empleados</span>
+            </span>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {TAMANOS.map((t) => (
+                <label key={t.value} className="relative cursor-pointer">
+                  <input
+                    type="radio"
+                    name="tamano"
+                    value={t.value}
+                    required
+                    className="peer absolute inset-0 cursor-pointer opacity-0"
+                  />
+                  <span className="block rounded-xl border border-slate-200 bg-white px-4 py-3 text-foreground transition-colors peer-checked:border-foreground peer-checked:bg-foreground peer-checked:text-white peer-focus-visible:ring-4 peer-focus-visible:ring-brand-mint/30">
+                    <span className="block text-[15px] font-medium">{t.value}</span>
+                    <span className="mt-0.5 block text-[13px] opacity-60">{t.detalle}</span>
+                  </span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="industria" className={labelBase}>
+              Industria
+            </label>
+            <div className="relative">
+              <select
+                id="industria"
+                name="industria"
+                required
+                defaultValue=""
+                className={`${inputBase} appearance-none pr-11 invalid:text-slate-400`}
+              >
+                <option value="" disabled>
+                  Selecciona una opción
+                </option>
+                {INDUSTRIAS.map((i) => (
+                  <option key={i} value={i} className="text-foreground">
+                    {i}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown
+                aria-hidden
+                className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+              />
+            </div>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2">
+            {CUENTAS.map((c) => (
+              <div key={c.name}>
+                <label htmlFor={c.name} className={labelBase}>
+                  {c.label}
+                </label>
+                <input
+                  id={c.name}
+                  name={c.name}
+                  type="text"
+                  required
+                  inputMode="numeric"
+                  pattern="0*[1-9][0-9]*"
+                  title="Número entero, al menos 1"
+                  maxLength={6}
+                  onInput={(e) => {
+                    e.currentTarget.value = e.currentTarget.value.replace(/\D/g, "");
+                  }}
+                  className={`${inputBase} tabular-nums`}
+                />
+                {c.hint && <p className="mt-1.5 text-[13px] text-slate-500">{c.hint}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+      </Seccion>
+
       <Seccion
-        numero="02"
+        numero="03"
         titulo="Volumen mensual"
         copy="Escribe la cantidad aproximada por mes de cada área, considerando la suma de todas tus empresas. Deja en blanco lo que no aplique."
       >
@@ -203,7 +283,7 @@ export default function CotizacionForm() {
       </Seccion>
 
       <Seccion
-        numero="03"
+        numero="04"
         titulo="Módulos especiales"
         copy="Indica cuáles quieres que incluyamos en la propuesta."
       >
