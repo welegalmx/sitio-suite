@@ -244,6 +244,20 @@ export default function CotizacionForm() {
               </div>
             ))}
           </div>
+
+          <div>
+            <label htmlFor="referido" className={labelBase}>
+              Referido por <span className="font-normal text-slate-400">· opcional</span>
+            </label>
+            <input
+              id="referido"
+              name="referido"
+              type="text"
+              maxLength={120}
+              placeholder="Nombre de la persona o empresa"
+              className={inputBase}
+            />
+          </div>
         </div>
       </Seccion>
 

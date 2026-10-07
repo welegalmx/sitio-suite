@@ -83,9 +83,9 @@ export const ORDEN_HOJA: { name: string; columna: string }[] = [
   { name: "biometricos", columna: "KYC" },
 ];
 
-// Encabezado de la pestaña de la hoja (fila 1). Tamaño, Industria y Usuarios
-// siguen el orden de "Clientes" (E, F, J) y Usuarios queda pegado al bloque
-// de volúmenes (K…O).
+// Encabezado de la pestaña de la hoja (fila 1). Tamaño, Industria, Referido
+// por y Usuarios siguen el orden de "Clientes" (E, F, G, J) y Usuarios queda
+// pegado al bloque de volúmenes (K…O).
 export const COTIZACION_COLUMNAS = [
   "Fecha",
   "Cliente",
@@ -94,6 +94,7 @@ export const COTIZACION_COLUMNAS = [
   "WhatsApp",
   "Tamaño",
   "Industria",
+  "Referido por",
   ...CUENTAS.map((c) => c.label),
   ...ORDEN_HOJA.map((c) => c.columna),
   ...MODULOS.map((m) => m.label),

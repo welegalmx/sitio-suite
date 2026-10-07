@@ -91,6 +91,9 @@ export async function POST(request: Request) {
     );
   }
 
+  // Opcional: quién nos refirió (persona o empresa).
+  const referido = clean(body.referido, 120);
+
   // Workspaces y usuarios: obligatorios y al menos 1.
   const cuentas: number[] = [];
   for (const campo of CUENTAS) {
@@ -154,6 +157,7 @@ export async function POST(request: Request) {
         whatsapp,
         tamano,
         industria,
+        referido,
         ...cuentas,
         ...ORDEN_HOJA.map((c) => volumenes[c.name]),
         ...modulos,
