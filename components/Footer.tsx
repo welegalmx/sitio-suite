@@ -18,6 +18,12 @@ export default function Footer() {
         <div className="mt-8 flex flex-col items-center gap-2.5 border-t border-white/10 pt-8 text-center">
           <p className="text-xs text-white/65">{footer.credit}</p>
           <a
+            href={footer.privacidad.href}
+            className="text-xs text-white/65 underline underline-offset-4 transition-colors hover:text-brand-mint"
+          >
+            {footer.privacidad.label}
+          </a>
+          <a
             href={footer.registro.href}
             className="text-xs text-white/65 underline underline-offset-4 transition-colors hover:text-brand-mint"
           >

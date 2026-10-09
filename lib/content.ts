@@ -553,7 +553,7 @@ export const footer = {
       title: "Legal",
       links: [
         { label: "Términos de servicio", href: "#" },
-        { label: "Aviso de privacidad", href: "#" },
+        { label: "Aviso de privacidad", href: "https://suite.welegal.mx/legal/privacidad" },
         { label: "Política de datos", href: "#" },
         { label: "NOM-151", href: "#" },
         { label: "LFPDPPP", href: "#" },
@@ -561,6 +561,12 @@ export const footer = {
     },
   ] as FooterColumn[],
   credit: "© 2026 we.legal Suite · 🇲🇽 Hecho en México · welegal.mx",
+  // Visible en todas las páginas: Google lo exige para verificar la app de
+  // los conectores de nube (el aviso vive en la Suite).
+  privacidad: {
+    label: "Aviso de privacidad",
+    href: "https://suite.welegal.mx/legal/privacidad",
+  },
   // Link discreto de acceso al registro de marca (externo).
   registro: {
     label: "Ir a registro de marca",
